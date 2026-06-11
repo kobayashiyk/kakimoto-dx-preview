@@ -352,6 +352,129 @@
   .view{display:none;}
   .view.active{display:block;}
 
+  /* ===== catalog view ===== */
+  .cat-lead{font-size:12px;color:var(--muted);margin-bottom:14px;}
+  .cat-workspace{
+    display:grid;grid-template-columns:minmax(420px,5fr) minmax(360px,4fr);
+    gap:22px;align-items:start;
+  }
+  @media (max-width:980px){.cat-workspace{grid-template-columns:1fr;}}
+  .cat-toggle{display:flex;gap:10px;margin-bottom:4px;}
+  .cat-tg{
+    flex:1;border:1px solid var(--line);background:#FFFDF8;border-radius:6px;
+    padding:9px 8px 7px;cursor:pointer;text-align:center;
+    font-family:'Noto Serif JP',serif;font-size:14.5px;font-weight:600;
+    color:var(--muted);letter-spacing:.04em;line-height:1.45;
+  }
+  .cat-tg small{display:block;font-family:'Noto Sans JP',sans-serif;font-size:10.5px;font-weight:400;letter-spacing:.04em;}
+  .cat-tg:hover{border-color:var(--kaki);}
+  .cat-tg.active{border-color:var(--kaki);background:#FFF8EA;color:var(--sumi);box-shadow:inset 0 -3px 0 var(--kaki);}
+  .step-label{
+    font-size:11.5px;font-weight:700;color:var(--kaki-dark);letter-spacing:.08em;
+    margin:16px 0 8px;display:flex;align-items:center;gap:8px;
+  }
+  .step-label::after{content:"";flex:1;height:1px;background:var(--line-soft);}
+  .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  @media (max-width:560px){.plan-grid{grid-template-columns:1fr;}}
+  .plan-card{
+    border:1px solid var(--line);background:#FFFDF8;border-radius:6px;
+    padding:8px 11px;cursor:pointer;text-align:left;line-height:1.5;
+  }
+  .plan-card:hover{border-color:var(--kaki);}
+  .plan-card.active{border-color:var(--kaki);background:#FFF8EA;box-shadow:0 0 0 1px var(--kaki) inset;}
+  .plan-card .pc-tag{
+    display:inline-block;font-size:10px;font-weight:700;color:var(--midori);
+    border:1px solid var(--midori);border-radius:3px;padding:0 5px;letter-spacing:.04em;margin-bottom:1px;
+  }
+  .plan-card .pc-name{display:block;font-family:'Noto Serif JP',serif;font-size:13px;font-weight:600;}
+  .plan-card .pc-spec{display:block;font-size:10.5px;color:var(--muted);}
+  .series-row{
+    display:flex;align-items:center;gap:6px;padding:6px 0;
+    border-bottom:1px solid var(--line-soft);flex-wrap:wrap;
+  }
+  .series-row:last-child{border-bottom:none;}
+  .series-row .sr-name{flex:none;width:82px;font-size:12.5px;font-weight:700;letter-spacing:.02em;}
+  .grade-btn{
+    border:1px solid var(--line);background:#FFFDF8;border-radius:5px;
+    padding:4px 10px;cursor:pointer;font-size:11px;line-height:1.45;text-align:center;color:var(--sumi);
+  }
+  .grade-btn b{display:block;font-size:12px;font-feature-settings:"tnum";white-space:nowrap;}
+  .grade-btn:hover{border-color:var(--kaki);}
+  .grade-btn.active{border-color:var(--kaki);background:#FFF8EA;box-shadow:0 0 0 1px var(--kaki) inset;}
+  .grade-btn:disabled{opacity:.4;cursor:not-allowed;background:#F3EFE6;}
+  .grade-btn:disabled:hover{border-color:var(--line);}
+  .dw-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .dw-badge{
+    display:inline-flex;align-items:center;font-size:12px;font-weight:700;color:var(--midori);
+    border:1px solid var(--midori);border-radius:999px;padding:3px 14px;letter-spacing:.04em;
+  }
+  .cat-note{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.7;}
+  .cat-source{
+    margin-top:18px;font-size:11px;color:var(--muted);line-height:1.7;
+    border-top:1px solid var(--line);padding-top:10px;
+  }
+
+  /* ---- 積算パネル ---- */
+  .sum-product{
+    background:var(--kinari);border:1px solid var(--line);border-radius:6px;padding:10px 13px;
+  }
+  .sum-product .sum-label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;}
+  .sum-product .sum-name{font-size:12.5px;font-weight:700;line-height:1.55;margin:2px 0;}
+  .sum-product .sum-list{
+    font-family:'Noto Serif JP',serif;font-size:21px;font-weight:700;color:var(--kaki-dark);
+    font-feature-settings:"tnum";
+  }
+  .rate-row{margin-top:12px;}
+  .rate-row label{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;
+  }
+  .rate-row label b{font-size:14px;color:var(--sumi);font-feature-settings:"tnum";}
+  .rate-row input[type=range]{width:100%;accent-color:var(--kaki);margin:2px 0;}
+  .rate-result{display:flex;justify-content:space-between;font-size:12.5px;color:#45403A;}
+  .rate-result b{font-feature-settings:"tnum";}
+  .rate-warn{
+    display:none;margin-top:5px;font-size:11.5px;font-weight:700;color:var(--shu);
+    background:#F8EDE8;border:1px solid #E3C0B5;border-radius:5px;padding:4px 9px;line-height:1.5;
+  }
+  .rate-block.warn .rate-warn{display:block;}
+  .rate-block.warn #s-costrate,
+  .rate-block.warn #s-costprice{color:var(--shu);}
+  .rate-block.warn #r-cost{accent-color:var(--shu);}
+  .pack-block{margin-top:14px;border:1px solid var(--line);border-radius:6px;padding:9px 12px;}
+  .pack-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .ck{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;cursor:pointer;}
+  .ck input{accent-color:var(--kaki);width:15px;height:15px;flex:none;cursor:pointer;}
+  .pack-head .pack-price{margin-left:auto;font-feature-settings:"tnum";font-size:13px;}
+  .pack-toggle{
+    border:1px solid var(--line);background:#fff;border-radius:4px;cursor:pointer;
+    font-size:11px;font-weight:700;color:var(--kaki-dark);padding:2px 9px;
+  }
+  .pack-toggle:hover{border-color:var(--kaki);}
+  .pack-detail{display:none;margin-top:7px;border-top:1px dashed var(--line);padding-top:6px;}
+  .pack-detail.open{display:block;}
+  .pack-detail dl{display:flex;justify-content:space-between;font-size:11.5px;padding:1px 0;color:#45403A;}
+  .pack-detail dd{font-feature-settings:"tnum";}
+  .extra-ck{font-weight:500;padding:4px 0;font-size:12.5px;}
+  .extra-ck b{margin-left:auto;font-feature-settings:"tnum";font-size:12.5px;}
+  .cat-totals{
+    margin-top:14px;background:var(--kinari);border:1px solid var(--line);border-radius:6px;
+    padding:11px 13px;font-size:13px;
+  }
+  .cat-totals dl{display:flex;justify-content:space-between;padding:2px 0;}
+  .cat-totals dd{font-weight:700;font-feature-settings:"tnum";}
+  .cat-grand{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-top:1px solid var(--line);margin-top:6px;padding-top:7px;
+  }
+  .cat-grand span{font-size:14px;font-weight:700;letter-spacing:.1em;}
+  .cat-grand b{
+    font-family:'Noto Serif JP',serif;font-size:25px;font-weight:700;color:var(--kaki-dark);
+    font-feature-settings:"tnum";
+  }
+  .cat-margin{margin-top:6px;font-size:11.5px;color:var(--midori);font-weight:700;}
+  .cat-margin small{display:block;font-weight:400;color:var(--muted);font-size:10.5px;line-height:1.6;}
+
   /* ===== footer note ===== */
   .demo-note{
     max-width:1280px;margin:0 auto;padding:0 24px 40px;
@@ -390,7 +513,7 @@
     <div class="logo"><span class="logo-mark">柿</span>柿本ホーム産業</div>
     <div class="tool-name">見積カルテ</div>
     <span class="demo-badge">デモ版</span>
-    <div class="header-date">2026年6月10日（水）</div>
+    <div class="header-date" id="headerDate"></div>
   </div>
 </header>
 
@@ -402,12 +525,110 @@
 <div class="container">
 
   <div class="view-tabs">
-    <button class="view-tab active" data-view="new" onclick="switchView('new')">新規見積</button>
+    <button class="view-tab active" data-view="catalog" onclick="switchView('catalog')">カタログ見積</button>
+    <button class="view-tab" data-view="new" onclick="switchView('new')">新規見積</button>
     <button class="view-tab" data-view="dup" onclick="switchView('dup')">過去の見積から複製</button>
   </div>
 
+  <!-- ============ カタログ見積 ============ -->
+  <div class="view active" id="view-catalog">
+    <p class="cat-lead">メーカー定価が決まっている商品は、カタログから選ぶだけで概算ではない正確な見積金額が出せます。掛け率と工事費もその場で調整できます。</p>
+    <div class="cat-workspace">
+
+      <!-- ===== 左: 商品選択 ===== -->
+      <div class="panel">
+        <div class="panel-title">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          商品を選ぶ — タカラスタンダード
+        </div>
+
+        <div class="cat-toggle">
+          <button class="cat-tg active" id="tg-kitchen" onclick="setCatCategory('kitchen')">システムキッチン<small>I型 間口255cm</small></button>
+          <button class="cat-tg" id="tg-bath" onclick="setCatCategory('bath')">システムバス<small>戸建て用</small></button>
+        </div>
+
+        <!-- キッチン選択フロー -->
+        <div id="k-flow">
+          <div class="step-label">STEP 1　プランを選ぶ</div>
+          <div class="plan-grid" id="k-plans"></div>
+          <div class="step-label">STEP 2　シリーズ・扉グレードを選ぶ</div>
+          <div id="k-series"></div>
+          <div class="step-label">STEP 3　食器洗い乾燥機</div>
+          <div class="dw-row" id="k-dw"></div>
+          <p class="cat-note">食洗機45cm＝EW-45R3、60cm＝NP-60MS8。価格は税別メーカー希望小売価格です。消費税・搬入・取付費等は別途（→右の工事費パックで計上）。</p>
+        </div>
+
+        <!-- バス選択フロー -->
+        <div id="b-flow" style="display:none;">
+          <div class="step-label">STEP 1　シリーズ・プランを選ぶ</div>
+          <div class="plan-grid" id="b-plans"></div>
+          <div class="step-label">STEP 2　サイズを選ぶ</div>
+          <div class="dw-row" id="b-sizes"></div>
+          <p class="cat-note">UB→UBの交換前提です。在来浴室からの交換・マンション用サイズは現地調査のうえ別途お見積りします。価格は税別メーカー希望小売価格です。</p>
+        </div>
+      </div>
+
+      <!-- ===== 右: 積算パネル ===== -->
+      <div class="panel">
+        <div class="panel-title">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg>
+          積算 — 選ぶたびに自動計算
+        </div>
+
+        <div class="sum-product">
+          <div class="sum-label">商品定価（税別）</div>
+          <div class="sum-name" id="s-name">—</div>
+          <div class="sum-list" id="s-list">—</div>
+        </div>
+
+        <div class="rate-block" id="rate-block">
+          <div class="rate-row">
+            <label><span>販売掛け率</span><b id="s-salerate">80%</b></label>
+            <input type="range" id="r-sale" min="60" max="95" step="5" value="80" oninput="onRate()">
+            <div class="rate-result"><span>商品販売価格</span><b id="s-saleprice">0 円</b></div>
+          </div>
+          <div class="rate-row">
+            <label><span>仕入掛け率</span><b id="s-costrate">65%</b></label>
+            <input type="range" id="r-cost" min="50" max="85" step="5" value="65" oninput="onRate()">
+            <div class="rate-result"><span>商品仕入原価（粗利計算用）</span><b id="s-costprice">0 円</b></div>
+            <div class="rate-warn">仕入掛け率が販売掛け率を上回っています。販売掛け率を見直してください。</div>
+          </div>
+          <p class="cat-note" style="margin-top:7px;">掛け率は仕入条件に合わせて設定できます。</p>
+        </div>
+
+        <div class="pack-block">
+          <div class="pack-head">
+            <label class="ck"><input type="checkbox" id="ck-pack" checked onchange="onPack()"><span id="pack-name">キッチン交換標準工事</span></label>
+            <b class="pack-price" id="pack-price">248,000円</b>
+            <button class="pack-toggle" id="pack-toggle" onclick="togglePackDetail()">内訳</button>
+          </div>
+          <div class="pack-detail" id="pack-detail"></div>
+        </div>
+
+        <div class="step-label" style="margin-top:14px;">追加工事（必要なものにチェック）</div>
+        <div id="extra-list"></div>
+
+        <div class="cat-totals">
+          <dl><dt>商品販売価格</dt><dd id="c-product">0 円</dd></dl>
+          <dl><dt>工事費小計</dt><dd id="c-works">0 円</dd></dl>
+          <dl><dt>小計（税別）</dt><dd id="c-sub">0 円</dd></dl>
+          <dl><dt>消費税（10%）</dt><dd id="c-tax">0 円</dd></dl>
+          <div class="cat-grand"><span class="serif">税込合計</span><b id="c-total">¥0</b></div>
+          <div class="cat-margin">粗利試算 <b id="c-margin">0 円</b>（<span id="c-mrate">0.0</span>%）<small>商品粗利＝定価×（販売掛け率−仕入掛け率）、工事粗利＝工事費×30%として試算</small></div>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px;" onclick="applyCatalog()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          この内容を見積書に反映
+        </button>
+      </div>
+
+    </div>
+    <p class="cat-source">価格出典: タカラスタンダード公式価格表（takara-standard.co.jp / kitchen.pdf・bath.pdf、2026年6月時点）。税別メーカー希望小売価格。実導入時は全シリーズ・全間口・最新版を収録し、他メーカー（LIXIL・TOTO・クリナップ等）にも対応予定。</p>
+  </div>
+
   <!-- ============ 新規見積 ============ -->
-  <div class="view active" id="view-new">
+  <div class="view" id="view-new">
     <div class="workspace">
 
       <!-- ===== 左: 入力 ===== -->
@@ -485,8 +706,8 @@
           <div class="paper-head">
             <div class="paper-title serif" id="p-title">御見積書</div>
             <div class="paper-no">
-              <span id="p-no">見積番号：K-20260610-01</span><br>
-              発行日：2026年6月10日
+              <span id="p-no">見積番号：K-00000000-01</span><br>
+              発行日：<span id="p-date"></span>
             </div>
           </div>
 
@@ -881,8 +1102,7 @@ function duplicate(idx){
 // ================= 画面切替・その他 =================
 function switchView(v){
   document.querySelectorAll(".view-tab").forEach(t=> t.classList.toggle("active", t.dataset.view === v));
-  $("view-new").classList.toggle("active", v === "new");
-  $("view-dup").classList.toggle("active", v === "dup");
+  document.querySelectorAll(".view").forEach(el=> el.classList.toggle("active", el.id === "view-"+v));
 }
 
 function clearRows(){
@@ -907,11 +1127,303 @@ function toast(msg){
   toastTimer = setTimeout(()=> t.classList.remove("show"), 3200);
 }
 
+// ================= カタログ見積（タカラスタンダード公式価格表・税別） =================
+// キッチン: I型間口255cm。価格は「約◯◯◯万円」（万円単位の数値で保持、積算は×10,000円）
+// 配列 [食洗なし, 食洗あり(45cm)] / 単一値はそのプラン構成込み価格
+const K_SERIES = [
+  {id:"lemure",  label:"レミュー",   grades:["G1","G2","G3"]},
+  {id:"treasia", label:"トレーシア", grades:["G1","G2"]},
+  {id:"edel",    label:"エーデル",   grades:[""]},
+  {id:"refit",   label:"リフィット", grades:["G1","G2","G3"]},
+];
+
+const K_PLANS = [
+  {id:"basic", name:"ベーシックプラン", spec:"ワークトップ：アクリル人造大理石（エーデル・リフィットはステンレス）", dw:"select",
+   p:{lemure_G1:[113,129],lemure_G2:[104,117],lemure_G3:[97,112],treasia_G1:[80,88],treasia_G2:[75,84],edel:[46,53],refit_G1:[40,53],refit_G2:[38,50],refit_G3:[37,49]}},
+  {id:"care", name:"お手入れ重視プラン", spec:"アクリル人造大理石・ホーロークリーンレンジフード", dw:"select",
+   p:{lemure_G1:[120,138],lemure_G2:[112,126],lemure_G3:[106,120],treasia_G1:[90,99],treasia_G2:[86,95],edel:[65,72],refit_G1:[58,70],refit_G2:[56,68],refit_G3:[55,66]}},
+  {id:"kaji", name:"家事効率プラン", spec:"家事らくシンク・食洗機60cm込み", dw:"included", dwBadge:"食洗機60cm込み",
+   p:{lemure_G1:149,lemure_G2:138,lemure_G3:133,treasia_G1:110,treasia_G2:106,edel:86,refit_G1:95,refit_G2:92,refit_G3:91}},
+  {id:"quartz", name:"クォーツセレクトプラン", spec:"クォーツストーンワークトップ・食洗機45cm込み", dw:"included", dwBadge:"食洗機45cm込み",
+   p:{lemure_G1:140,lemure_G2:127,lemure_G3:122,treasia_G1:104,treasia_G2:100,refit_G1:89,refit_G2:86,refit_G3:85}},
+  {id:"front", name:"大容量フロントオープン食洗プラン", spec:"食洗機60cm（海外製フロントオープン）込み", dw:"included", dwBadge:"食洗機60cm込み",
+   p:{lemure_G1:135,lemure_G2:126,lemure_G3:120,treasia_G1:109,treasia_G2:105,refit_G1:95,refit_G2:93,refit_G3:92}},
+  {id:"flat", name:"フラット対面おすすめキッチン", spec:"IHヒーター・フラット対面型（エーデルはダイニング側収納なし）", dw:"included", dwBadge:"食洗機込み",
+   p:{lemure_G1:173,lemure_G2:157,lemure_G3:150,treasia_G1:129,treasia_G2:124,edel:100,refit_G1:106,refit_G2:103,refit_G3:100}},
+];
+
+// バス: 戸建て用（円単位の正確値）
+const B_PLANS = [
+  {series:"プレデンシア", name:"鋳物ホーロー浴槽プラン", p:{"1616":1823500,"1620":1919500}},
+  {series:"プレデンシア", name:"ベーシックプラン", p:{"1616":1219000,"1620":1306000}},
+  {series:"グランスパ", name:"鋳物ホーロー浴槽プラン", p:{"1616":1045800,"1620":1132800}},
+  {series:"グランスパ", name:"ベーシックプラン（キープクリーン浴槽）", p:{"1616":875600,"1620":962600}},
+  {series:"グランスパ", name:"フロアこだわりプラン（FRP浴槽）", note:"防水パンなしの場合", p:{"1616":662500,"1620":738500}},
+  {series:"グランスパ", name:"シンプルプラン（FRP浴槽）", note:"防水パンなしの場合", p:{"1616":527800,"1620":569300}},
+];
+
+const PACKS = {
+  kitchen:{name:"キッチン交換標準工事", total:248000, items:[
+    ["既存キッチン解体撤去・処分",58000],["給排水接続工事",45000],["電気・ガス工事",38000],["キッチン組立・施工",72000],["養生・諸経費",35000]]},
+  bath:{name:"浴室交換標準工事", total:348000, items:[
+    ["既存浴室解体撤去・処分",95000],["給排水工事",68000],["電気工事",45000],["メーカー責任施工・組立",95000],["入口枠補修・養生",45000]]},
+};
+const EXTRAS = {
+  kitchen:[["床CF張替",38000],["壁・天井クロス張替",40000],["IH用電源増設工事",35000]],
+  bath:[["洗面所側クロス・CF張替",45000],["給湯器接続替え",28000],["手すり追加（2本）",28000]],
+};
+
+const catState = {
+  cat:"kitchen",
+  kPlan:0, kSel:"lemure_G1", kDw:false,
+  bPlan:3, bSize:"1616",
+  sale:80, cost:65,
+  pack:{kitchen:true, bath:true}, packOpen:false,
+  extras:{kitchen:[false,false,false], bath:[false,false,false]},
+};
+
+function kitchenMan(plan, key){
+  const v = plan.p[key];
+  return Array.isArray(v) ? v[catState.kDw ? 1 : 0] : v;
+}
+
+function getCatProduct(){
+  if(catState.cat === "kitchen"){
+    const plan = K_PLANS[catState.kPlan];
+    const sid = catState.kSel.split("_")[0];
+    const grade = catState.kSel.split("_")[1] || "";
+    const s = K_SERIES.find(x=> x.id === sid);
+    const man = kitchenMan(plan, catState.kSel);
+    const dwTxt = plan.dw === "select" ? (catState.kDw ? "食洗機45cmあり" : "食洗機なし") : plan.dwBadge;
+    const parts = [plan.name, grade ? "扉"+grade : "標準扉", "I型間口255cm", dwTxt];
+    return {
+      name:"タカラスタンダード システムキッチン "+s.label+"（"+parts.join("・")+"）",
+      list: man*10000,
+      listDisp:"約"+man+"万円（税別）"
+    };
+  }
+  const plan = B_PLANS[catState.bPlan];
+  return {
+    name:"タカラスタンダード システムバス "+plan.series+" "+plan.name+"（"+catState.bSize+"サイズ・戸建て用）",
+    list: plan.p[catState.bSize],
+    listDisp: yen(plan.p[catState.bSize])+"円（税別）"
+  };
+}
+
+function renderKPlans(){
+  const g = $("k-plans"); g.innerHTML = "";
+  K_PLANS.forEach((pl,i)=>{
+    const c = document.createElement("button");
+    c.className = "plan-card"+(i === catState.kPlan ? " active" : "");
+    c.innerHTML = '<span class="pc-name">'+pl.name+'</span><span class="pc-spec">'+pl.spec+'</span>';
+    c.addEventListener("click", ()=>{
+      catState.kPlan = i;
+      const plan = K_PLANS[i];
+      if(plan.p[catState.kSel] === undefined){
+        const sid = catState.kSel.split("_")[0];
+        const keys = Object.keys(plan.p);
+        catState.kSel = keys.find(k=> k === sid || k.indexOf(sid+"_") === 0) || keys[0];
+      }
+      renderKPlans(); renderKSeries(); renderKDw(); recalcCat();
+    });
+    g.appendChild(c);
+  });
+}
+
+function renderKSeries(){
+  const plan = K_PLANS[catState.kPlan];
+  const wrap = $("k-series"); wrap.innerHTML = "";
+  K_SERIES.forEach(s=>{
+    const row = document.createElement("div");
+    row.className = "series-row";
+    const nm = document.createElement("span");
+    nm.className = "sr-name"; nm.textContent = s.label;
+    row.appendChild(nm);
+    s.grades.forEach(g=>{
+      const key = g ? s.id+"_"+g : s.id;
+      const btn = document.createElement("button");
+      btn.className = "grade-btn";
+      if(plan.p[key] === undefined){
+        btn.disabled = true;
+        btn.innerHTML = '<span>'+(g || "標準仕様")+'</span><b>設定なし</b>';
+      }else{
+        btn.innerHTML = '<span>'+(g || "標準仕様")+'</span><b>約'+kitchenMan(plan,key)+'万円</b>';
+        if(key === catState.kSel) btn.classList.add("active");
+        btn.addEventListener("click", ()=>{ catState.kSel = key; renderKSeries(); renderKDw(); recalcCat(); });
+      }
+      row.appendChild(btn);
+    });
+    wrap.appendChild(row);
+  });
+}
+
+function renderKDw(){
+  const plan = K_PLANS[catState.kPlan];
+  const wrap = $("k-dw"); wrap.innerHTML = "";
+  if(plan.dw === "select"){
+    [["食洗機なし",false],["食洗機あり（45cm）",true]].forEach(pair=>{
+      const v = plan.p[catState.kSel];
+      const btn = document.createElement("button");
+      btn.className = "grade-btn"+(catState.kDw === pair[1] ? " active" : "");
+      btn.innerHTML = '<span>'+pair[0]+'</span><b>約'+v[pair[1]?1:0]+'万円</b>';
+      btn.addEventListener("click", ()=>{ catState.kDw = pair[1]; renderKSeries(); renderKDw(); recalcCat(); });
+      wrap.appendChild(btn);
+    });
+  }else{
+    const b = document.createElement("span");
+    b.className = "dw-badge";
+    b.textContent = plan.dwBadge;
+    wrap.appendChild(b);
+  }
+}
+
+function renderBPlans(){
+  const g = $("b-plans"); g.innerHTML = "";
+  B_PLANS.forEach((pl,i)=>{
+    const c = document.createElement("button");
+    c.className = "plan-card"+(i === catState.bPlan ? " active" : "");
+    c.innerHTML = '<span class="pc-tag">'+pl.series+'</span><span class="pc-name">'+pl.name+'</span>'
+      + '<span class="pc-spec">1616 '+yen(pl.p["1616"])+'円〜'+(pl.note ? "　※"+pl.note : "")+'</span>';
+    c.addEventListener("click", ()=>{ catState.bPlan = i; renderBPlans(); renderBSizes(); recalcCat(); });
+    g.appendChild(c);
+  });
+}
+
+function renderBSizes(){
+  const plan = B_PLANS[catState.bPlan];
+  const wrap = $("b-sizes"); wrap.innerHTML = "";
+  [["1616","1坪"],["1620","1.25坪"]].forEach(pair=>{
+    const btn = document.createElement("button");
+    btn.className = "grade-btn"+(catState.bSize === pair[0] ? " active" : "");
+    btn.innerHTML = '<span>'+pair[0]+'（'+pair[1]+'）</span><b>'+yen(plan.p[pair[0]])+'円</b>';
+    btn.addEventListener("click", ()=>{ catState.bSize = pair[0]; renderBSizes(); recalcCat(); });
+    wrap.appendChild(btn);
+  });
+}
+
+function renderPackExtras(){
+  const c = catState.cat;
+  const pack = PACKS[c];
+  $("pack-name").textContent = pack.name;
+  $("pack-price").textContent = yen(pack.total)+"円";
+  $("ck-pack").checked = catState.pack[c];
+  const pd = $("pack-detail");
+  pd.innerHTML = pack.items.map(it=> '<dl><dt>'+it[0]+'</dt><dd>'+yen(it[1])+'円</dd></dl>').join("");
+  pd.classList.toggle("open", catState.packOpen);
+  const el = $("extra-list"); el.innerHTML = "";
+  EXTRAS[c].forEach((ex,i)=>{
+    const lb = document.createElement("label");
+    lb.className = "ck extra-ck";
+    lb.innerHTML = '<input type="checkbox"'+(catState.extras[c][i] ? " checked" : "")+'><span>'+ex[0]+'</span><b>'+yen(ex[1])+'円</b>';
+    lb.querySelector("input").addEventListener("change", (e)=>{ catState.extras[c][i] = e.target.checked; recalcCat(); });
+    el.appendChild(lb);
+  });
+}
+
+function setCatCategory(c){
+  catState.cat = c;
+  $("tg-kitchen").classList.toggle("active", c === "kitchen");
+  $("tg-bath").classList.toggle("active", c === "bath");
+  $("k-flow").style.display = c === "kitchen" ? "" : "none";
+  $("b-flow").style.display = c === "bath" ? "" : "none";
+  renderPackExtras();
+  recalcCat();
+}
+
+function onRate(){
+  catState.sale = parseInt($("r-sale").value, 10);
+  catState.cost = parseInt($("r-cost").value, 10);
+  recalcCat();
+}
+
+function onPack(){
+  catState.pack[catState.cat] = $("ck-pack").checked;
+  recalcCat();
+}
+
+function togglePackDetail(){
+  catState.packOpen = !catState.packOpen;
+  $("pack-detail").classList.toggle("open", catState.packOpen);
+  $("pack-toggle").textContent = catState.packOpen ? "閉じる" : "内訳";
+}
+
+function catWorksTotal(){
+  const c = catState.cat;
+  let works = catState.pack[c] ? PACKS[c].total : 0;
+  EXTRAS[c].forEach((ex,i)=>{ if(catState.extras[c][i]) works += ex[1]; });
+  return works;
+}
+
+function recalcCat(){
+  const prod = getCatProduct();
+  const sale = Math.round(prod.list * catState.sale / 100);
+  const cost = Math.round(prod.list * catState.cost / 100);
+  $("s-name").textContent = prod.name;
+  $("s-list").textContent = prod.listDisp;
+  $("s-salerate").textContent = catState.sale + "%";
+  $("s-costrate").textContent = catState.cost + "%";
+  $("s-saleprice").textContent = yen(sale) + " 円";
+  $("s-costprice").textContent = yen(cost) + " 円";
+  $("rate-block").classList.toggle("warn", catState.cost > catState.sale);
+
+  const works = catWorksTotal();
+  const sub   = sale + works;
+  const tax   = Math.round(sub * 0.10);
+  const margin = Math.round(prod.list * (catState.sale - catState.cost) / 100 + works * 0.30);
+  const mrate  = sub > 0 ? margin / sub * 100 : 0;
+  $("c-product").textContent = yen(sale) + " 円";
+  $("c-works").textContent   = yen(works) + " 円";
+  $("c-sub").textContent     = yen(sub) + " 円";
+  $("c-tax").textContent     = yen(tax) + " 円";
+  $("c-total").textContent   = "¥" + yen(sub + tax);
+  $("c-margin").textContent  = yen(margin) + " 円";
+  $("c-mrate").textContent   = mrate.toFixed(1);
+}
+
+function applyCatalog(){
+  const prod = getCatProduct();
+  const sale = Math.round(prod.list * catState.sale / 100);
+  const cost = Math.round(prod.list * catState.cost / 100);
+  const c = catState.cat;
+  clearRows();
+  $("f-koujimei").value = c === "kitchen" ? "システムキッチン交換工事" : "浴室ユニットバス交換工事";
+  addRow({name:prod.name, qty:1, unit:"式", price:sale, cost:cost, fromMaster:true});
+  if(catState.pack[c]){
+    PACKS[c].items.forEach(it=> addRow({name:it[0], qty:1, unit:"式", price:it[1], cost:Math.round(it[1]*0.7), fromMaster:true}));
+  }
+  EXTRAS[c].forEach((ex,i)=>{
+    if(catState.extras[c][i]) addRow({name:ex[0], qty:1, unit:"式", price:ex[1], cost:Math.round(ex[1]*0.7), fromMaster:true});
+  });
+  if(isInvoice) toggleInvoice();
+  syncHead(); recalc();
+  switchView("new");
+  toast("カタログ見積の内容を明細に反映しました。見積書では諸経費10%が加算されます。");
+}
+
 // ================= 初期化 =================
 renderDup();
 addRow(); addRow(); addRow();
 syncHead();
 recalc();
+renderKPlans(); renderKSeries(); renderKDw();
+renderBPlans(); renderBSizes();
+renderPackExtras();
+recalcCat();
+</script>
+<script>
+/* 日付・見積番号を当日基準で動的表示 */
+(function(){
+  var d = new Date();
+  var y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+  var youbi = ['日','月','火','水','木','金','土'][d.getDay()];
+  var pad = function(n){ return String(n).padStart(2, '0'); };
+  var el = document.getElementById('headerDate');
+  if (el) el.textContent = y + '年' + m + '月' + day + '日（' + youbi + '）';
+  var pd = document.getElementById('p-date');
+  if (pd) pd.textContent = y + '年' + m + '月' + day + '日';
+  var pn = document.getElementById('p-no');
+  if (pn) pn.textContent = '見積番号：K-' + y + pad(m) + pad(day) + '-01';
+})();
 </script>
 <script>
 /* suite embed mode: hide own header when loaded inside a product suite */
