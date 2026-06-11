@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工務店DX デモ一覧 | SafariTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kaki: #C9861F;
+    --kaki-dark: #A8690F;
+    --sumi: #2A2520;
+    --kinari: #FAF6EF;
+    --green: #3D5A4C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--sumi);
+    background: var(--kinari);
+    line-height: 1.8;
+  }
+  header {
+    background: #fff;
+    border-bottom: 3px solid var(--kaki);
+    padding: 20px 24px;
+  }
+  .header-inner {
+    max-width: 1120px; margin: 0 auto;
+    display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+  .logo { font-family: "Noto Serif JP", serif; font-size: 22px; font-weight: 700; letter-spacing: 0.06em; }
+  .logo small { font-size: 12px; color: var(--kaki-dark); margin-left: 10px; font-weight: 500; }
+  .credit { font-size: 12px; color: #8a8276; }
+
+  .hero {
+    max-width: 1120px; margin: 0 auto; padding: 48px 24px 28px;
+  }
+  .hero h1 {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(24px, 4vw, 34px);
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+  }
+  .hero h1 span { color: var(--kaki-dark); }
+  .hero p { margin-top: 16px; max-width: 700px; color: #57504a; }
+
+  .cards {
+    max-width: 1120px; margin: 0 auto; padding: 8px 24px 8px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 22px;
+  }
+  .card {
+    background: #fff; border: 1px solid #e8e0d2; border-radius: 10px;
+    padding: 28px 26px 22px; display: flex; flex-direction: column;
+  }
+  .card .num {
+    font-family: "Noto Serif JP", serif; font-size: 13px; color: var(--kaki-dark);
+    letter-spacing: 0.15em; margin-bottom: 8px;
+  }
+  .card h2 {
+    font-family: "Noto Serif JP", serif; font-size: 23px; line-height: 1.4; letter-spacing: 0.04em;
+  }
+  .card .stage {
+    margin-top: 4px; font-size: 12.5px; font-weight: 700; color: var(--green); letter-spacing: .06em;
+  }
+  .card .parts {
+    margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .card .parts span {
+    font-size: 11.5px; font-weight: 500; color: var(--kaki-dark);
+    border: 1px solid #e3cfa6; background: #FFFBF2; border-radius: 999px; padding: 2px 11px;
+  }
+  .card .issue {
+    margin-top: 14px; font-size: 13px; color: #6d655c;
+    border-left: 3px solid #e8e0d2; padding-left: 12px;
+  }
+  .card .copy { margin-top: 12px; font-size: 14px; font-weight: 500; }
+  .card .price {
+    margin-top: 14px; font-size: 12.5px; color: #6d655c;
+  }
+  .card .price b { font-family: "Noto Serif JP", serif; font-size: 18px; color: var(--kaki-dark); }
+  .card .links {
+    margin-top: auto; padding-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .card .links a {
+    text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: .04em;
+    border-radius: 5px; padding: 8px 18px;
+  }
+  .card .links .demo-link { background: var(--kaki); color: #fff; }
+  .card .links .demo-link:hover { background: var(--kaki-dark); }
+  .card .links .teian-link {
+    border: 1.5px solid var(--green); color: var(--green); padding: 6.5px 12px; font-size: 12px;
+  }
+  .card .links .teian-link:hover { background: var(--green); color: #fff; }
+
+  .set-note {
+    max-width: 1120px; margin: 20px auto 0; padding: 0 24px;
+  }
+  .set-note .box {
+    background: #fff; border: 2px solid var(--kaki); border-radius: 8px;
+    padding: 14px 20px; font-size: 13.5px; display: flex; gap: 16px; flex-wrap: wrap; align-items: baseline;
+  }
+  .set-note b { font-family: "Noto Serif JP", serif; font-size: 16px; color: var(--kaki-dark); }
+
+  footer {
+    max-width: 1120px; margin: 28px auto 0; padding: 20px 24px 48px;
+    font-size: 12px; color: #948b7d; border-top: 1px solid #e8e0d2;
+  }
+  footer p + p { margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo">柿本ホーム産業<small>工務店DX デモ</small></div>
+    <div class="credit">提案: SafariTech / 2026.06</div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>昔ながらの工務店の<span>受注の流れ全体</span>を、<br>3つの道具で支える</h1>
+  <p>ホームページは「看板」。その先にある、問い合わせの取り逃がし・営業と顧客管理の属人化・現場の段取りと発信の停滞を、受注の流れに沿った3つの製品で解決します。各製品はタブで機能を切り替えて実演できます。</p>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <div class="num">01 ｜ 入口</div>
+    <h2>うけつけ24</h2>
+    <div class="stage">問い合わせを取り逃がさない</div>
+    <div class="parts"><span>かんたん概算シミュレーター</span><span>補助金チェック</span><span>るすばんAI（電話受付）</span></div>
+    <p class="issue">「いくらか分からないから電話しづらい」。受付は9〜18時のみで、現場に出ていると電話も取れない。</p>
+    <p class="copy">HPでは24時間「概算」と「使える補助金」がその場でわかり、時間外の電話はAIが一次応対。昼も夜も、HPでも電話でも、受付係が立ち続けます。</p>
+    <p class="price">月額たたき台 <b>25,000円</b>/月</p>
+    <div class="links">
+      <a class="demo-link" href="suite_uketsuke24.html">デモを開く</a>
+      <a class="teian-link" href="proposals/unyo1_uketsuke24.html">導入・運用</a>
+      <a class="teian-link" href="proposals/teian1_mitsumori.html">資料: 概算</a>
+      <a class="teian-link" href="proposals/teian6_denwa_ai.html">資料: 電話AI</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">02 ｜ 営業・顧客</div>
+    <h2>OBカルテ</h2>
+    <div class="stage">Excel台帳を、売上を生む基幹に</div>
+    <div class="parts"><span>顧客台帳CRM</span><span>メンテ時期の自動算出</span><span>見積・請求</span><span>補助金チェック</span></div>
+    <p class="issue">顧客管理がExcelで限界。給湯器や外壁塗装の更新時期を、量販店や飛び込み営業に先に取られている。</p>
+    <p class="copy">Excelをそのまま取り込み、フォロー時期を自動算出。見積・補助金提案から受注まで一本につながり、受注すると次のメンテ周期が自動で始まります。</p>
+    <p class="price">月額たたき台 <b>30,000円</b>/月</p>
+    <div class="links">
+      <a class="demo-link" href="suite_ob_karte.html">デモを開く</a>
+      <a class="teian-link" href="proposals/unyo2_ob_karte.html">導入・運用</a>
+      <a class="teian-link" href="proposals/teian3_ob_karte.html">資料: OBカルテ</a>
+      <a class="teian-link" href="proposals/teian4_mitsumorisho.html">資料: 見積</a>
+      <a class="teian-link" href="proposals/teian5_hojokin.html">資料: 補助金</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="num">03 ｜ 現場・発信</div>
+    <h2>現場手帳</h2>
+    <div class="stage">段取りを共有し、実績を見せ続ける</div>
+    <div class="parts"><span>現場ボード（予定共有）</span><span>施工事例スタジオ</span></div>
+    <p class="issue">予定は事務所のホワイトボードの中。現場写真はスマホに死蔵され、HPの事例更新は数ヶ月止まる。</p>
+    <p class="copy">職人×日付の週間ボードで段取りを共有。完工したら写真2枚で、HP掲載・お知らせ・Instagram・口コミ依頼文まで3分で発信。</p>
+    <p class="price">月額たたき台 <b>15,000円</b>/月</p>
+    <div class="links">
+      <a class="demo-link" href="suite_genba_techo.html">デモを開く</a>
+      <a class="teian-link" href="proposals/unyo3_genba_techo.html">導入・運用</a>
+      <a class="teian-link" href="proposals/teian7_yotei_board.html">資料: 現場ボード</a>
+      <a class="teian-link" href="proposals/teian2_jirei_studio.html">資料: 事例</a>
+    </div>
+  </div>
+</div>
+
+<div class="set-note">
+  <div class="box">
+    <b>3点セット 月額55,000円</b>
+    <span>（たたき台・単体導入も可）まずは効きどころ1製品からの実証導入（3ヶ月・モニター条件）をおすすめします。</span>
+  </div>
+</div>
+
+<footer>
+  <p>本ページおよび各デモは提案用のモックアップです。金額・顧客データ・制度情報はすべて架空またはサンプルです。</p>
+  <p>提案資料はブラウザの印刷（Ctrl+P）でそのままA4・1枚のPDFになります。</p>
+  <p>SafariTech Inc. — 柿本ホーム産業様 打合せ資料</p>
+</footer>
+</body>
+</html>

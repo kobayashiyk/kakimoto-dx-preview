@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>見積カルテ ご提案 | 工務店DX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kaki: #C9861F;
+    --kaki-dark: #A8690F;
+    --sumi: #2A2520;
+    --kinari: #FAF6EF;
+    --green: #3D5A4C;
+    --aka: #B5452E;
+    --line: #E8E0D2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--sumi);
+    background: #d8d2c6;
+    line-height: 1.7;
+    font-size: 13px;
+  }
+  .serif { font-family: "Noto Serif JP", serif; }
+
+  /* A4縦 1枚 */
+  .sheet {
+    width: 210mm; min-height: 296mm;
+    margin: 16px auto; padding: 14mm 15mm 12mm;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,.18);
+    display: flex; flex-direction: column;
+  }
+  @page { size: A4 portrait; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .sheet { margin: 0; box-shadow: none; width: auto; min-height: auto; }
+  }
+  @media screen and (max-width: 760px) {
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 24px 18px; }
+  }
+
+  /* ヘッダー */
+  .doc-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 3px solid var(--kaki); padding-bottom: 10px;
+  }
+  .doc-head .for { font-size: 11px; color: #8a8276; letter-spacing: .08em; }
+  .doc-head .brand { font-family: "Noto Serif JP", serif; font-size: 13px; font-weight: 700; }
+  .doc-head .meta { text-align: right; font-size: 10.5px; color: #8a8276; }
+
+  .title-block { margin: 18px 0 6px; }
+  .tool-tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+    color: var(--kaki-dark); border: 1px solid var(--kaki); border-radius: 99px;
+    padding: 1px 12px; margin-bottom: 8px;
+  }
+  .tool-tag.internal { color: var(--green); border-color: var(--green); }
+  h1 {
+    font-family: "Noto Serif JP", serif; font-size: 26px; letter-spacing: .05em; line-height: 1.4;
+  }
+  .lead-copy { margin-top: 6px; font-size: 14px; font-weight: 500; color: var(--kaki-dark); }
+
+  /* セクション共通 */
+  section { margin-top: 16px; }
+  h2 {
+    font-family: "Noto Serif JP", serif; font-size: 15px; letter-spacing: .1em;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  h2::before { content: ""; display: block; width: 14px; height: 14px; background: var(--kaki); flex: none; }
+  h2 .en { font-size: 10px; color: #b9ae9c; letter-spacing: .15em; font-family: "Noto Sans JP", sans-serif; font-weight: 500; }
+
+  /* 課題 */
+  .issues { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .issue {
+    background: var(--kinari); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px;
+  }
+  .issue b { display: block; font-size: 12.5px; margin-bottom: 3px; color: var(--aka); }
+  .issue p { font-size: 11.5px; color: #57504a; }
+
+  /* 解決・機能 */
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .feature { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; display: flex; gap: 10px; }
+  .feature .no {
+    font-family: "Noto Serif JP", serif; color: var(--kaki); font-weight: 700; font-size: 16px; flex: none; line-height: 1.4;
+  }
+  .feature b { display: block; font-size: 12.5px; }
+  .feature p { font-size: 11.5px; color: #57504a; }
+
+  /* 効果 */
+  .effects { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .effect {
+    text-align: center; background: var(--green); color: #fff; border-radius: 6px; padding: 12px 8px 10px;
+  }
+  .effect .big { font-family: "Noto Serif JP", serif; font-size: 19px; font-weight: 700; line-height: 1.3; }
+  .effect .small { font-size: 10.5px; opacity: .85; margin-top: 2px; }
+  .effect-note { font-size: 10px; color: #948b7d; margin-top: 5px; }
+
+  /* 料金・導入 2カラム */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .price-box { border: 2px solid var(--kaki); border-radius: 6px; padding: 12px 14px; }
+  .price-box .plan { font-size: 11.5px; color: #57504a; }
+  .price-box .price { font-family: "Noto Serif JP", serif; font-size: 24px; font-weight: 700; color: var(--kaki-dark); }
+  .price-box .price small { font-size: 12px; }
+  .price-box .note { font-size: 10.5px; color: #948b7d; margin-top: 4px; }
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 10px; padding: 4px 0; font-size: 12px; align-items: baseline; }
+  .steps .s {
+    flex: none; font-size: 10px; font-weight: 700; color: #fff; background: var(--sumi);
+    border-radius: 3px; padding: 1px 8px; letter-spacing: .08em;
+  }
+
+  /* デモ案内 */
+  .demo-ref {
+    margin-top: 14px; background: var(--kinari); border: 1px dashed var(--kaki);
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; display: flex; gap: 12px; align-items: center;
+  }
+  .demo-ref b { color: var(--kaki-dark); }
+  .demo-ref code { font-family: Consolas, monospace; font-size: 11px; background: #fff; padding: 1px 8px; border-radius: 3px; border: 1px solid var(--line); }
+
+  /* フッター */
+  .doc-foot {
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; font-size: 9.5px; color: #948b7d;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="doc-head">
+    <div>
+      <div class="for">柿本ホーム産業株式会社 御中</div>
+      <div class="brand">工務店DXシリーズ ご提案</div>
+    </div>
+    <div class="meta">2026年6月<br>SafariTech Inc.</div>
+  </div>
+
+  <div class="title-block">
+    <span class="tool-tag internal">社内向けツール</span>
+    <h1>見積カルテ</h1>
+    <p class="lead-copy">「社長にしか作れない見積書」をなくす</p>
+  </div>
+
+  <section>
+    <h2>現状の課題 <span class="en">PROBLEM</span></h2>
+    <div class="issues">
+      <div class="issue"><b>見積作成が属人化</b><p>単価と組み合わせが頭の中にしかなく、社長と番頭しか作れない。日中は現場、見積は夜なべ仕事に。</p></div>
+      <div class="issue"><b>転記ミス・計算ミス</b><p>手書きとExcel職人芸の限界。数量の打ち間違い、計算式のズレ、請求書への転記でまたミスが起きる。</p></div>
+      <div class="issue"><b>粗利がどんぶり勘定</b><p>原価を引いていくらに残るのか、出してみないと分からない。気づかぬうちに赤字工事を受けてしまう。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>解決策と主な機能 <span class="en">SOLUTION</span></h2>
+    <div class="features">
+      <div class="feature"><span class="no">01</span><div><b>項目マスタでサジェスト入力</b><p>「トイレ」と打てば工事項目の候補が出て、標準単価・単位が自動セット。誰が作っても同じ単価に揃います。</p></div></div>
+      <div class="feature"><span class="no">02</span><div><b>帳票プレビューと印刷</b><p>入力と同時にA4見積書が完成。社名・明細・合計入りで、そのままお客様に提出できる品質です。</p></div></div>
+      <div class="feature"><span class="no">03</span><div><b>粗利率のリアルタイム表示</b><p>各項目が原価を持ち、入力中に粗利率を常時表示。20%を切ると警告が出て、赤字見積を提出前に止めます。</p></div></div>
+      <div class="feature"><span class="no">04</span><div><b>請求書変換・過去見積の複製</b><p>見積→請求書はワンクリックで様式変換、転記ゼロ。よく出る工事は過去見積を複製して数量を直すだけ。</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>期待できる効果 <span class="en">IMPACT</span></h2>
+    <div class="effects">
+      <div class="effect"><div class="big">60分→10分</div><div class="small">見積1件あたりの作成時間</div></div>
+      <div class="effect"><div class="big">誰でも</div><div class="small">社員全員が見積を作成可能に</div></div>
+      <div class="effect"><div class="big">粗利見える化</div><div class="small">赤字工事を提出前に防止</div></div>
+    </div>
+    <p class="effect-note">※ 効果は一般的なリフォーム業界データおよび当社仮説に基づく試算です。実証期間で実測します。</p>
+  </section>
+
+  <section>
+    <div class="two-col">
+      <div>
+        <h2>料金イメージ <span class="en">PRICE</span></h2>
+        <div class="price-box">
+          <div class="plan">月額（たたき台）</div>
+          <div class="price">15,000<small>円/月</small></div>
+          <div class="note">初期設定費・実証期間の特別条件は打合せにて</div>
+        </div>
+      </div>
+      <div>
+        <h2>導入の流れ <span class="en">STEPS</span></h2>
+        <ul class="steps">
+          <li><span class="s">STEP 1</span>貴社の単価表・帳票様式をマスタに登録</li>
+          <li><span class="s">STEP 2</span>実証導入（3ヶ月・見積作成時間を実測）</li>
+          <li><span class="s">STEP 3</span>本導入・運用定着サポート</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="demo-ref">
+    <b>動くデモをご用意しています</b>
+    <span>ファイル: <code>demo4_mitsumorisho.html</code> — その場で実際の操作感をご覧いただけます。</span>
+  </div>
+
+  <div class="doc-foot">
+    <span>本資料の金額・効果数値はすべて提案用のたたき台です。</span>
+    <span>SafariTech Inc. | shibuya@safaritech.co.jp</span>
+  </div>
+
+</div>
+</body>
+</html>

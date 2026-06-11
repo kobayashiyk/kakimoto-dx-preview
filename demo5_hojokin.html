@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>補助金ナビ｜柿本ホーム産業（デモ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --kaki:#C9861F;
+  --kaki-dark:#A8690F;
+  --sumi:#2A2520;
+  --kinari:#FAF6EF;
+  --midori:#3D5A4C;
+  --aka:#B5452E;
+  --line:#E6DECF;
+  --white:#FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  color:var(--sumi);
+  background:var(--kinari);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.serif{font-family:'Noto Serif JP',serif;}
+button{font-family:inherit;}
+
+/* ---------- header ---------- */
+.site-header{
+  background:var(--white);
+  border-bottom:3px solid var(--kaki);
+}
+.header-inner{
+  max-width:960px;margin:0 auto;
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.brand{display:flex;flex-direction:column;}
+.brand-name{
+  font-family:'Noto Serif JP',serif;
+  font-weight:700;font-size:1.3rem;letter-spacing:.06em;color:var(--sumi);
+  line-height:1.3;
+}
+.brand-name .mark{color:var(--kaki);}
+.brand-sub{font-size:.72rem;color:#6B6258;letter-spacing:.08em;margin-top:2px;}
+.header-right{display:flex;align-items:center;gap:12px;}
+.tool-name{
+  font-family:'Noto Serif JP',serif;font-weight:700;font-size:1.02rem;
+  letter-spacing:.1em;color:var(--midori);
+  border-left:3px solid var(--midori);padding-left:12px;line-height:1.4;
+}
+.demo-badge{
+  font-size:.7rem;font-weight:700;color:var(--kaki-dark);
+  border:1px solid var(--kaki);border-radius:3px;
+  padding:2px 9px;letter-spacing:.12em;white-space:nowrap;
+  background:#FDF6EA;
+}
+@media (max-width:560px){
+  .brand-name{font-size:1.08rem;}
+  .tool-name{font-size:.88rem;padding-left:9px;}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  max-width:960px;margin:0 auto;
+  padding:36px 20px 6px;
+  text-align:center;
+}
+.hero-lead{
+  display:inline-block;
+  font-size:.82rem;font-weight:700;color:var(--midori);
+  letter-spacing:.14em;
+  border-bottom:2px solid var(--midori);
+  padding-bottom:4px;margin-bottom:14px;
+}
+.hero h1{
+  font-size:clamp(1.4rem,4.5vw,1.95rem);
+  font-weight:700;letter-spacing:.05em;line-height:1.5;
+}
+.hero h1 .accent{color:var(--kaki-dark);}
+.hero-desc{
+  margin-top:12px;font-size:.9rem;color:#564E44;
+  max-width:600px;margin-left:auto;margin-right:auto;
+}
+.hero-points{
+  margin-top:16px;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;
+}
+.hero-points span{
+  font-size:.74rem;font-weight:500;color:var(--sumi);
+  background:var(--white);border:1px solid var(--line);
+  border-radius:999px;padding:4px 14px;letter-spacing:.04em;
+}
+
+/* ---------- app card ---------- */
+.app-wrap{max-width:820px;margin:26px auto 0;padding:0 16px 28px;}
+.app-card{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:10px;
+  box-shadow:0 6px 24px rgba(42,37,32,.06);
+  overflow:hidden;
+}
+.app-body{padding:28px 34px 36px;}
+@media (max-width:560px){.app-body{padding:22px 18px 28px;}}
+
+/* progress */
+.progress{padding:20px 34px 0;}
+@media (max-width:560px){.progress{padding:18px 18px 0;}}
+.progress-labels{
+  display:flex;justify-content:space-between;
+  font-size:.74rem;color:#9A9183;font-weight:500;letter-spacing:.04em;
+  margin-bottom:6px;
+}
+.progress-labels .current{color:var(--kaki-dark);font-weight:700;}
+.progress-bar{height:6px;background:#F0EADD;border-radius:99px;overflow:hidden;}
+.progress-fill{
+  height:100%;width:33%;background:linear-gradient(90deg,var(--kaki),var(--kaki-dark));
+  border-radius:99px;transition:width .45s ease;
+}
+
+.step-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.16rem;font-weight:700;letter-spacing:.04em;margin-bottom:4px;
+}
+.step-note{font-size:.82rem;color:#6B6258;margin-bottom:20px;}
+
+/* ---------- step1: work cards ---------- */
+.work-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:12px;
+}
+@media (max-width:460px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+.work-card{
+  appearance:none;border:1.5px solid var(--line);background:var(--white);
+  border-radius:8px;padding:16px 8px 13px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  color:var(--sumi);position:relative;
+  transition:border-color .2s,box-shadow .2s,transform .15s,background .2s;
+  min-height:112px;
+}
+.work-card:hover{
+  border-color:var(--kaki);
+  box-shadow:0 4px 14px rgba(201,134,31,.16);
+  transform:translateY(-2px);
+}
+.work-card svg{width:38px;height:38px;stroke:var(--kaki-dark);flex-shrink:0;}
+.work-card .work-name{font-size:.84rem;font-weight:700;line-height:1.4;text-align:center;}
+.work-card .check-mark{
+  position:absolute;top:8px;right:8px;width:20px;height:20px;
+  border:1.5px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--white);transition:background .2s,border-color .2s;
+}
+.work-card .check-mark svg{width:11px;height:11px;stroke:#fff;stroke-width:3;opacity:0;}
+.work-card.selected{
+  border-color:var(--kaki-dark);background:#FDF8EE;
+  box-shadow:0 4px 14px rgba(201,134,31,.18);
+}
+.work-card.selected .check-mark{background:var(--kaki-dark);border-color:var(--kaki-dark);}
+.work-card.selected .check-mark svg{opacity:1;}
+
+/* ---------- step2: questions ---------- */
+.q-block{margin-bottom:24px;}
+.q-label{
+  font-size:.95rem;font-weight:700;margin-bottom:10px;
+  display:flex;gap:10px;align-items:baseline;line-height:1.55;
+}
+.q-label .q-no{
+  flex:none;font-family:'Noto Serif JP',serif;font-size:.8rem;font-weight:700;
+  color:#fff;background:var(--midori);border-radius:3px;padding:1px 9px;letter-spacing:.06em;
+}
+.q-sub{font-size:.78rem;color:#8A8276;margin:-6px 0 10px 46px;}
+.yn-row{display:flex;gap:10px;margin-left:46px;}
+@media (max-width:460px){.yn-row,.q-sub{margin-left:0;}}
+.yn-btn{
+  appearance:none;border:1.5px solid var(--line);background:var(--white);
+  border-radius:6px;padding:8px 30px;cursor:pointer;
+  font-size:.9rem;font-weight:700;color:#6B6258;
+  transition:border-color .2s,background .2s,color .2s;
+}
+.yn-btn:hover{border-color:var(--kaki);}
+.yn-btn.active{border-color:var(--kaki-dark);background:var(--kaki-dark);color:#fff;}
+
+/* ---------- buttons ---------- */
+.btn-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;flex-wrap:wrap;}
+.btn-primary{
+  appearance:none;border:none;cursor:pointer;
+  background:var(--kaki-dark);color:#fff;
+  font-size:.96rem;font-weight:700;letter-spacing:.08em;
+  border-radius:6px;padding:13px 42px;
+  transition:background .2s,transform .15s,opacity .2s;
+}
+.btn-primary:hover{background:#8F570A;transform:translateY(-1px);}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.btn-ghost{
+  appearance:none;border:1.5px solid var(--line);background:var(--white);cursor:pointer;
+  color:#6B6258;font-size:.88rem;font-weight:500;
+  border-radius:6px;padding:11px 24px;
+  transition:border-color .2s,color .2s;
+}
+.btn-ghost:hover{border-color:var(--kaki);color:var(--kaki-dark);}
+.select-count{font-size:.82rem;color:#8A8276;}
+.select-count b{color:var(--kaki-dark);font-size:1rem;}
+
+/* ---------- result ---------- */
+.total-box{
+  background:var(--midori);color:#fff;border-radius:8px;
+  text-align:center;padding:22px 16px 18px;margin-bottom:22px;
+}
+.total-box .total-label{font-size:.8rem;letter-spacing:.16em;opacity:.85;}
+.total-box .total-amount{
+  font-family:'Noto Serif JP',serif;font-weight:700;
+  font-size:clamp(1.7rem,6vw,2.5rem);line-height:1.3;letter-spacing:.04em;
+}
+.total-box .total-amount small{font-size:.55em;}
+.total-box .total-sub{font-size:.76rem;opacity:.8;margin-top:4px;}
+
+.subsidy-card{
+  border:1px solid var(--line);border-radius:8px;
+  padding:16px 20px 14px;margin-bottom:12px;background:var(--white);
+}
+.subsidy-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.subsidy-name{font-family:'Noto Serif JP',serif;font-size:1.02rem;font-weight:700;line-height:1.5;}
+.org-badge{
+  flex:none;font-size:.7rem;font-weight:700;letter-spacing:.1em;
+  border-radius:3px;padding:2px 10px;white-space:nowrap;color:#fff;margin-top:3px;
+}
+.org-badge.kuni{background:var(--kaki-dark);}
+.org-badge.shi{background:var(--midori);}
+.org-badge.kaigo{background:var(--aka);}
+.subsidy-amount{
+  font-family:'Noto Serif JP',serif;font-weight:700;font-size:1.12rem;color:var(--kaki-dark);
+  margin:4px 0 8px;
+}
+.subsidy-row{display:flex;gap:10px;font-size:.82rem;line-height:1.65;margin-top:4px;}
+.subsidy-row .rh{
+  flex:none;width:5.4em;color:#8A8276;font-weight:500;
+}
+.subsidy-row .rv{color:#3E3830;}
+.subsidy-row .rv.caution{color:var(--aka);}
+
+.no-result{
+  border:1px dashed var(--line);border-radius:8px;background:#FCFAF5;
+  padding:26px 20px;text-align:center;font-size:.9rem;color:#6B6258;
+}
+
+/* combine note */
+.combine-note{
+  background:#FCF4E4;border:1px solid #EAD9B8;border-radius:8px;
+  padding:14px 18px;margin:18px 0 22px;
+}
+.combine-note h3{font-size:.88rem;letter-spacing:.06em;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.combine-note h3 svg{width:17px;height:17px;stroke:var(--kaki-dark);flex:none;}
+.combine-note ul{list-style:none;}
+.combine-note li{
+  font-size:.8rem;color:#57504A;padding-left:1em;position:relative;line-height:1.7;
+}
+.combine-note li::before{content:"・";position:absolute;left:0;color:var(--kaki-dark);}
+
+/* letter */
+.letter-block{margin-top:24px;}
+.letter-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.letter-title{font-family:'Noto Serif JP',serif;font-size:1.02rem;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:9px;}
+.letter-title svg{width:19px;height:19px;stroke:var(--midori);flex:none;}
+.btn-copy{
+  appearance:none;border:1.5px solid var(--midori);background:var(--white);cursor:pointer;
+  color:var(--midori);font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  border-radius:6px;padding:7px 18px;display:flex;align-items:center;gap:7px;
+  transition:background .2s,color .2s;
+}
+.btn-copy:hover{background:var(--midori);color:#fff;}
+.btn-copy:hover svg{stroke:#fff;}
+.btn-copy svg{width:14px;height:14px;stroke:var(--midori);transition:stroke .2s;}
+.btn-copy.copied{background:var(--midori);color:#fff;}
+.btn-copy.copied svg{stroke:#fff;}
+.letter-area{
+  width:100%;min-height:300px;resize:vertical;
+  border:1px solid var(--line);border-radius:8px;background:#FCFAF5;
+  font-family:'Noto Sans JP',sans-serif;font-size:.84rem;line-height:1.85;color:var(--sumi);
+  padding:16px 18px;
+}
+.letter-area:focus{outline:2px solid rgba(201,134,31,.35);}
+
+/* footer note */
+.demo-note{
+  max-width:820px;margin:0 auto;padding:0 16px 56px;
+  font-size:.76rem;color:#8A8276;text-align:center;line-height:1.8;
+}
+.site-footer{
+  background:var(--sumi);color:#C9C2B6;
+  text-align:center;font-size:.74rem;letter-spacing:.06em;
+  padding:18px 16px;
+}
+.site-footer b{color:#E8E0D2;}
+
+/* step visibility */
+.step{display:none;}
+.step.active{display:block;animation:fadein .35s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-name">柿本<span class="mark">ホーム</span>産業</span>
+      <span class="brand-sub">創業1965年｜横浜市青葉区</span>
+    </div>
+    <div class="header-right">
+      <span class="tool-name">補助金ナビ</span>
+      <span class="demo-badge">デモ版</span>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <span class="hero-lead">社内向け｜商談中にその場で確認</span>
+  <h1>使える補助金が、<span class="accent">その場でわかる。</span></h1>
+  <p class="hero-desc">工事内容とお客様の世帯条件をチェックするだけで、該当する補助金候補と概算補助額を即座に表示。お客様向けのご案内文まで自動で作成します。</p>
+  <div class="hero-points">
+    <span>所要時間 約1分</span>
+    <span>国・横浜市・介護保険に対応</span>
+    <span>ご案内文を自動生成</span>
+  </div>
+</section>
+
+<div class="app-wrap">
+  <div class="app-card">
+
+    <div class="progress">
+      <div class="progress-labels">
+        <span class="progress-step" id="pl1">1. 工事内容</span>
+        <span class="progress-step" id="pl2">2. 世帯条件</span>
+        <span class="progress-step" id="pl3">3. 結果</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="app-body">
+
+      <!-- ========== STEP 1 ========== -->
+      <div class="step active" id="step1">
+        <h2 class="step-title">ご検討中の工事内容を選んでください</h2>
+        <p class="step-note">複数選択できます。お客様との会話に出た工事はすべてチェックしてください。</p>
+        <div class="work-grid" id="workGrid"></div>
+        <div class="btn-row">
+          <span class="select-count"><b id="selCount">0</b> 件選択中</span>
+          <button class="btn-primary" id="toStep2" disabled>世帯条件へ進む</button>
+        </div>
+      </div>
+
+      <!-- ========== STEP 2 ========== -->
+      <div class="step" id="step2">
+        <h2 class="step-title">お客様の世帯条件を教えてください</h2>
+        <p class="step-note">3問だけです。わからない場合は「いいえ」のままで構いません。</p>
+
+        <div class="q-block">
+          <div class="q-label"><span class="q-no">問1</span>18歳以下のお子様がいる、または夫婦どちらかが39歳以下ですか？</div>
+          <p class="q-sub">子育て・若者夫婦世帯向けの上乗せ判定に使います。</p>
+          <div class="yn-row" data-q="q1">
+            <button class="yn-btn" data-v="yes">はい</button>
+            <button class="yn-btn active" data-v="no">いいえ</button>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="q-label"><span class="q-no">問2</span>要介護・要支援認定を受けた方が同居していますか？</div>
+          <p class="q-sub">介護保険の住宅改修費支給の判定に使います。</p>
+          <div class="yn-row" data-q="q2">
+            <button class="yn-btn" data-v="yes">はい</button>
+            <button class="yn-btn active" data-v="no">いいえ</button>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="q-label"><span class="q-no">問3</span>横浜市内の持ち家（ご自身またはご家族名義）ですか？</div>
+          <p class="q-sub">横浜市の補助制度の判定に使います。</p>
+          <div class="yn-row" data-q="q3">
+            <button class="yn-btn" data-v="yes">はい</button>
+            <button class="yn-btn active" data-v="no">いいえ</button>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost" id="backTo1">工事内容に戻る</button>
+          <button class="btn-primary" id="toStep3">結果を見る</button>
+        </div>
+      </div>
+
+      <!-- ========== STEP 3 ========== -->
+      <div class="step" id="step3">
+        <h2 class="step-title">該当する補助金候補</h2>
+        <p class="step-note" id="resultNote"></p>
+
+        <div id="totalArea"></div>
+        <div id="resultList"></div>
+        <div id="combineArea"></div>
+
+        <div class="letter-block" id="letterBlock">
+          <div class="letter-head">
+            <span class="letter-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M4 7l8 6 8-6"/></svg>
+              お客様向けのご案内文
+            </span>
+            <button class="btn-copy" id="copyBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="1.5"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></svg>
+              <span id="copyLabel">コピーする</span>
+            </button>
+          </div>
+          <textarea class="letter-area" id="letterArea" spellcheck="false"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-ghost" id="backTo2">世帯条件に戻る</button>
+          <button class="btn-ghost" id="restart">最初からやり直す</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p class="demo-note">※制度内容・金額はデモ用サンプルです。実製品では最新制度データベースを毎月更新します。<br>※補助金の適用可否・正式な金額は、申請時点の各制度要綱に基づき確認が必要です。</p>
+
+<footer class="site-footer">
+  <b>補助金ナビ</b>（デモ版）｜柿本ホーム産業株式会社 様向けご提案｜制作: SafariTech Inc.
+</footer>
+
+<script>
+"use strict";
+
+/* ========== 工事項目データ ========== */
+var WORKS = [
+  { id:"mado",    name:"窓・断熱改修",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg>' },
+  { id:"kyuto",   name:"高効率給湯器（エコキュート等）",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7h4M10 10h4"/><circle cx="12" cy="16" r="2"/></svg>' },
+  { id:"toilet",  name:"節水型トイレ",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8v6H7z"/><path d="M7 9h12c0 5-3 9-8 9h-1l1 3H7l-1-4c-.7-2-1-4-1-5"/></svg>' },
+  { id:"bath",    name:"浴室・ユニットバス交換",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M6 12V5a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M17 19l1 2"/></svg>' },
+  { id:"tesuri",  name:"手すり設置・段差解消",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16"/><path d="M6 8v13M18 8v13"/><path d="M4 21h6v-4h5v-4h5"/></svg>' },
+  { id:"taishin", name:"耐震補強",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6l3 2 3-2v6"/></svg>' },
+  { id:"tosou",   name:"外壁・屋根塗装",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h12v5H5z"/><path d="M17 6h3v4l-8 2v3"/><rect x="10" y="15" width="4" height="6"/></svg>' },
+  { id:"kitchen", name:"キッチン交換",
+    icon:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="9" rx="1"/><path d="M3 14h18"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="6" r="2"/></svg>' }
+];
+
+/* ========== 補助金制度データ（2026年度サンプル） ========== */
+var SUBSIDIES = [
+  {
+    id:"kosodate",
+    name:"子育てグリーン住宅支援事業",
+    org:"国", orgClass:"kuni",
+    target:"窓・ドアの断熱改修、高効率給湯器、節水型トイレ、浴室改修、手すり設置等のバリアフリー改修、キッチンのエコ設備 ほか",
+    timing:"予算上限に達し次第終了。例年秋以降に予算消化が加速するため、早めの交付申請を推奨。",
+    match: function(w, h){
+      return ["mado","kyuto","toilet","bath","tesuri","kitchen"].some(function(k){ return w.indexOf(k) >= 0; });
+    },
+    amount: function(w, h){
+      return h.q1
+        ? { max:60, text:"最大60万円", note:"子育て・若者夫婦世帯のため上限60万円（サンプル）" }
+        : { max:40, text:"最大40万円", note:"一般世帯の上限40万円で算定（サンプル）" };
+    }
+  },
+  {
+    id:"kyutosho",
+    name:"給湯省エネ2026事業",
+    org:"国", orgClass:"kuni",
+    target:"エコキュート・ハイブリッド給湯機・エネファーム等の高効率給湯器の設置",
+    timing:"対象機種の性能要件あり。設置台数ごとに加算。予算枠の消化状況に注意。",
+    match: function(w, h){ return w.indexOf("kyuto") >= 0; },
+    amount: function(){ return { max:13, text:"最大13万円", note:"エコキュート1台あたり（性能加算込みサンプル）" }; }
+  },
+  {
+    id:"madoreno",
+    name:"先進的窓リノベ2026事業",
+    org:"国", orgClass:"kuni",
+    target:"既存窓の内窓設置・外窓交換・ガラス交換・断熱ドアへの交換",
+    timing:"補助額が大きく人気のため、年度前半での申請が有利。窓の性能区分で補助単価が変動。",
+    match: function(w, h){ return w.indexOf("mado") >= 0; },
+    amount: function(){ return { max:200, text:"最大200万円", note:"1戸あたり上限（窓の数・性能により変動）" }; }
+  },
+  {
+    id:"kaigo",
+    name:"介護保険の住宅改修費支給",
+    org:"介護保険", orgClass:"kaigo",
+    target:"手すりの取付け、段差の解消、滑り防止の床材変更、引き戸への扉交換、洋式便器への取替え 等",
+    timing:"必ず着工前にケアマネジャー経由で事前申請が必要。着工後の申請は支給対象外。",
+    match: function(w, h){ return (w.indexOf("tesuri") >= 0 || w.indexOf("toilet") >= 0 || w.indexOf("bath") >= 0) && h.q2; },
+    amount: function(){ return { max:18, text:"最大18万円", note:"支給限度基準額20万円の9割（自己負担1割の場合）" }; }
+  },
+  {
+    id:"yokohama_eco",
+    name:"横浜市住宅エコリフォーム補助（サンプル）",
+    org:"横浜市", orgClass:"shi",
+    target:"断熱改修、高効率給湯器、節水型トイレ、遮熱塗装などの省エネ・エコリフォーム工事",
+    timing:"市の年度予算枠あり。先着順のため受付開始（例年4〜5月）直後の申請を推奨。",
+    match: function(w, h){
+      return h.q3 && ["mado","kyuto","toilet","tosou"].some(function(k){ return w.indexOf(k) >= 0; });
+    },
+    amount: function(){ return { max:10, text:"最大10万円", note:"対象工事費の一部を補助（市制度サンプル）" }; }
+  },
+  {
+    id:"yokohama_taishin",
+    name:"横浜市木造住宅耐震改修促進事業（サンプル）",
+    org:"横浜市", orgClass:"shi",
+    target:"旧耐震基準（昭和56年5月以前着工）の木造住宅の耐震改修工事",
+    timing:"事前に市の無料耐震診断が必要。診断から改修まで年度をまたぐ場合があるため早めの着手を。",
+    match: function(w, h){ return h.q3 && w.indexOf("taishin") >= 0; },
+    amount: function(){ return { max:100, text:"最大100万円", note:"耐震改修工事費に対する補助（市制度サンプル）" }; }
+  }
+];
+
+/* ========== 併用可否の注意 ========== */
+var COMBINE_NOTES = [
+  "先進的窓リノベと子育てグリーンは、同一の窓工事での重複申請はできません（別の箇所・別工事であれば併用可）。",
+  "国の補助金と横浜市の補助金は原則併用できますが、同一工事費への重複充当はできません。",
+  "介護保険の住宅改修費は他制度と対象工事が重ならなければ併用可能です。必ず着工前の事前申請が必要です。",
+  "合計概算は各制度の上限額の単純合算です。実際の補助額は工事内容・申請時期により変動します。"
+];
+
+/* ========== 状態 ========== */
+var state = {
+  works: [],
+  household: { q1:false, q2:false, q3:false }
+};
+
+/* ========== STEP1: 工事カード描画 ========== */
+var workGrid = document.getElementById("workGrid");
+WORKS.forEach(function(w){
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "work-card";
+  btn.setAttribute("data-id", w.id);
+  btn.innerHTML =
+    '<span class="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg></span>' +
+    w.icon +
+    '<span class="work-name">' + w.name + '</span>';
+  btn.addEventListener("click", function(){
+    var idx = state.works.indexOf(w.id);
+    if (idx >= 0) { state.works.splice(idx, 1); btn.classList.remove("selected"); }
+    else { state.works.push(w.id); btn.classList.add("selected"); }
+    updateStep1();
+  });
+  workGrid.appendChild(btn);
+});
+
+function updateStep1(){
+  document.getElementById("selCount").textContent = state.works.length;
+  document.getElementById("toStep2").disabled = state.works.length === 0;
+}
+
+/* ========== STEP2: はい/いいえ ========== */
+document.querySelectorAll(".yn-row").forEach(function(row){
+  var q = row.getAttribute("data-q");
+  row.querySelectorAll(".yn-btn").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      row.querySelectorAll(".yn-btn").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      state.household[q] = (btn.getAttribute("data-v") === "yes");
+    });
+  });
+});
+
+/* ========== ステップ遷移 ========== */
+function showStep(n){
+  [1,2,3].forEach(function(i){
+    document.getElementById("step" + i).classList.toggle("active", i === n);
+    document.getElementById("pl" + i).classList.toggle("current", i === n);
+  });
+  document.getElementById("progressFill").style.width = (n * 33.4) + "%";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("pl1").classList.add("current");
+
+document.getElementById("toStep2").addEventListener("click", function(){ showStep(2); });
+document.getElementById("backTo1").addEventListener("click", function(){ showStep(1); });
+document.getElementById("toStep3").addEventListener("click", function(){ renderResult(); showStep(3); });
+document.getElementById("backTo2").addEventListener("click", function(){ showStep(2); });
+document.getElementById("restart").addEventListener("click", function(){
+  state.works = [];
+  state.household = { q1:false, q2:false, q3:false };
+  document.querySelectorAll(".work-card").forEach(function(c){ c.classList.remove("selected"); });
+  document.querySelectorAll(".yn-row").forEach(function(row){
+    row.querySelectorAll(".yn-btn").forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-v") === "no");
+    });
+  });
+  updateStep1();
+  showStep(1);
+});
+
+/* ========== 結果描画 ========== */
+function getMatches(){
+  return SUBSIDIES
+    .filter(function(s){ return s.match(state.works, state.household); })
+    .map(function(s){
+      var a = s.amount(state.works, state.household);
+      return { def: s, amount: a };
+    });
+}
+
+function workNames(){
+  return WORKS.filter(function(w){ return state.works.indexOf(w.id) >= 0; })
+              .map(function(w){ return w.name; });
+}
+
+function renderResult(){
+  var matches = getMatches();
+  var totalArea = document.getElementById("totalArea");
+  var list = document.getElementById("resultList");
+  var combineArea = document.getElementById("combineArea");
+  var note = document.getElementById("resultNote");
+  var letterBlock = document.getElementById("letterBlock");
+
+  list.innerHTML = "";
+  combineArea.innerHTML = "";
+
+  if (matches.length === 0) {
+    note.textContent = "選択された工事内容・世帯条件に基づく判定結果です。";
+    totalArea.innerHTML = "";
+    list.innerHTML =
+      '<div class="no-result">該当する補助金候補は見つかりませんでした。<br>' +
+      '外壁・屋根塗装は単独では対象制度が少ないですが、遮熱塗装や断熱改修との組み合わせで横浜市の制度対象になる場合があります。<br>' +
+      '工事内容や世帯条件を変えて、もう一度お試しください。</div>';
+    letterBlock.style.display = "none";
+    return;
+  }
+
+  letterBlock.style.display = "";
+  note.textContent = "選択された工事内容と世帯条件から、" + matches.length + "件の補助金候補が見つかりました。";
+
+  var total = matches.reduce(function(sum, m){ return sum + m.amount.max; }, 0);
+  totalArea.innerHTML =
+    '<div class="total-box">' +
+      '<div class="total-label">概算補助額の合計</div>' +
+      '<div class="total-amount">合計 最大' + total + '<small>万円</small></div>' +
+      '<div class="total-sub">各制度の上限額の単純合算です。実際の額は工事内容・申請時期で変動します。</div>' +
+    '</div>';
+
+  matches.forEach(function(m){
+    var card = document.createElement("div");
+    card.className = "subsidy-card";
+    card.innerHTML =
+      '<div class="subsidy-head">' +
+        '<span class="subsidy-name">' + m.def.name + '</span>' +
+        '<span class="org-badge ' + m.def.orgClass + '">' + m.def.org + '</span>' +
+      '</div>' +
+      '<div class="subsidy-amount">' + m.amount.text + '</div>' +
+      '<div class="subsidy-row"><span class="rh">対象工事</span><span class="rv">' + m.def.target + '</span></div>' +
+      '<div class="subsidy-row"><span class="rh">補助額目安</span><span class="rv">' + m.amount.text + '（' + m.amount.note + '）</span></div>' +
+      '<div class="subsidy-row"><span class="rh">申請時期</span><span class="rv caution">' + m.def.timing + '</span></div>';
+    list.appendChild(card);
+  });
+
+  combineArea.innerHTML =
+    '<div class="combine-note">' +
+      '<h3><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>併用可否のご注意</h3>' +
+      '<ul>' + COMBINE_NOTES.map(function(t){ return "<li>" + t + "</li>"; }).join("") + '</ul>' +
+    '</div>';
+
+  document.getElementById("letterArea").value = buildLetter(matches, total);
+  resetCopyBtn();
+}
+
+/* ========== ご案内文生成 ========== */
+function buildLetter(matches, total){
+  var lines = [];
+  lines.push("〇〇様");
+  lines.push("");
+  lines.push("このたびはリフォームをご検討いただき、誠にありがとうございます。");
+  lines.push("お打ち合わせいただいた「" + workNames().join("・") + "」の工事内容ですと、以下の補助金をご活用いただける可能性がございます。");
+  lines.push("");
+  matches.forEach(function(m){
+    lines.push("■ " + m.def.name + "（" + m.def.org + "）");
+    lines.push("　補助額の目安：" + m.amount.text);
+    lines.push("　" + m.def.timing);
+    lines.push("");
+  });
+  lines.push("各制度を組み合わせますと、合計で最大" + total + "万円の補助が見込めます（概算）。");
+  lines.push("");
+  lines.push("※補助金の適用には申請要件・期限がございます。併用の可否や正式な金額は、申請時点の制度要綱に基づき当社にて確認のうえ、責任を持って申請をサポートいたします。");
+  lines.push("※予算枠のある制度は先着順となるため、お早めのご決断をおすすめいたします。");
+  lines.push("");
+  lines.push("ご不明な点がございましたら、お気軽にお申し付けください。");
+  lines.push("");
+  lines.push("柿本ホーム産業株式会社");
+  lines.push("横浜市青葉区｜創業1965年");
+  return lines.join("\n");
+}
+
+/* ========== コピー ========== */
+var copyBtn = document.getElementById("copyBtn");
+var copyLabel = document.getElementById("copyLabel");
+var copyTimer = null;
+
+function resetCopyBtn(){
+  copyBtn.classList.remove("copied");
+  copyLabel.textContent = "コピーする";
+  if (copyTimer) { clearTimeout(copyTimer); copyTimer = null; }
+}
+
+copyBtn.addEventListener("click", function(){
+  var text = document.getElementById("letterArea").value;
+  function done(){
+    copyBtn.classList.add("copied");
+    copyLabel.textContent = "コピーしました";
+    copyTimer = setTimeout(resetCopyBtn, 2200);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text); done(); });
+  } else {
+    fallbackCopy(text);
+    done();
+  }
+});
+
+function fallbackCopy(text){
+  var ta = document.getElementById("letterArea");
+  ta.focus();
+  ta.select();
+  try { document.execCommand("copy"); } catch(e){}
+  ta.setSelectionRange(0, 0);
+  ta.blur();
+}
+</script>
+<script>
+/* suite embed mode: hide own header when loaded inside a product suite */
+if (new URLSearchParams(location.search).has('embed')) {
+  document.addEventListener('DOMContentLoaded', function(){
+    var h = document.querySelector('header');
+    if (h) h.style.display = 'none';
+  });
+}
+
+/* customer mode: HP埋め込みを想定したお客様向け表示（?mode=customer）
+   社内向け（既定）との違い: 文言がお客様目線、案内文生成の代わりに無料相談CTA */
+if (new URLSearchParams(location.search).get('mode') === 'customer') {
+  document.addEventListener('DOMContentLoaded', function(){
+    var lead = document.querySelector('.hero-lead');
+    if (lead) lead.textContent = 'お住まいのリフォームをご検討中の方へ｜HP埋め込みイメージ';
+    var h1 = document.querySelector('.hero h1');
+    if (h1) h1.innerHTML = 'あなたの工事に、<span class="accent">使える補助金があるかも。</span>';
+    var desc = document.querySelector('.hero-desc');
+    if (desc) desc.textContent = '工事の内容とかんたんな3つの質問だけで、使える可能性のある補助金と概算額がその場でわかります。結果からそのまま無料相談いただけます。';
+    var points = document.querySelectorAll('.hero-points span');
+    if (points.length >= 3) points[2].textContent = 'そのまま無料相談へ';
+
+    var note1 = document.querySelector('#step1 .step-note');
+    if (note1) note1.textContent = '複数選択できます。気になっている工事をすべてチェックしてください。';
+    var title2 = document.querySelector('#step2 .step-title');
+    if (title2) title2.textContent = 'ご家族について教えてください';
+
+    // 社内向けの「ご案内文」を隠し、無料相談CTAに置き換える
+    // （結果描画のたびに letterBlock.style.display が再設定されるため、CSSで恒久的に非表示にする）
+    var st = document.createElement('style');
+    st.textContent = '#letterBlock{display:none !important;}';
+    document.head.appendChild(st);
+    var letter = document.getElementById('letterBlock');
+    var cta = document.createElement('div');
+    cta.id = 'custCta';
+    cta.style.cssText = 'margin-top:22px;border:2px solid #C9861F;border-radius:8px;background:#FFFBF2;padding:18px 20px;text-align:center;';
+    cta.innerHTML =
+      '<p style="font-size:13.5px;line-height:1.7;margin-bottom:12px;">この結果は概算です。正式な対象判定や申請の手続きは、<b>柿本ホーム産業が無料でサポート</b>いたします。</p>' +
+      '<button id="custCtaBtn" style="font-family:inherit;cursor:pointer;border:none;border-radius:6px;background:#C9861F;color:#fff;font-size:15px;font-weight:700;letter-spacing:.06em;padding:12px 32px;">この結果をもとに無料相談する</button>' +
+      '<p style="font-size:11px;color:#7A7062;margin-top:10px;">実際のホームページでは、シミュレーション結果が問い合わせフォームにそのまま引き継がれます。</p>';
+    if (letter && letter.parentNode) letter.parentNode.insertBefore(cta, letter);
+    document.addEventListener('click', function(e){
+      if (e.target && e.target.id === 'custCtaBtn') {
+        cta.innerHTML =
+          '<p style="font-family:\'Noto Serif JP\',serif;font-size:17px;font-weight:700;color:#A8690F;margin-bottom:6px;">ご相談を受け付けました（デモ）</p>' +
+          '<p style="font-size:13px;line-height:1.7;">担当者より1営業日以内にご連絡いたします。シミュレーション結果は担当者に共有されるため、最初から説明し直す必要はありません。</p>';
+      }
+    });
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBカルテ | 柿本ホーム産業（デモ版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --kaki:#C9861F;
+    --kaki-dark:#A8690F;
+    --sumi:#2A2520;
+    --kinari:#FAF6EF;
+    --midori:#3D5A4C;
+    --shu:#B5452E;
+    --line:#E6DCC8;
+    --line-soft:#EFE8D8;
+    --white:#FFFFFF;
+    --muted:#7A7062;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Noto Sans JP',sans-serif;
+    background:var(--kinari);
+    color:var(--sumi);
+    font-size:15px;
+    line-height:1.7;
+  }
+  h1,h2,h3,.serif{font-family:'Noto Serif JP',serif;}
+
+  /* ===== header ===== */
+  header{
+    background:var(--white);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1180px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .logo{
+    font-family:'Noto Serif JP',serif;
+    font-size:20px;font-weight:700;letter-spacing:.06em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo-mark{
+    width:30px;height:30px;background:var(--kaki);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:16px;font-weight:700;border-radius:4px;flex:none;
+  }
+  .tool-name{
+    font-family:'Noto Serif JP',serif;
+    font-size:16px;font-weight:600;color:var(--kaki-dark);
+    border-left:1px solid var(--line);padding-left:14px;letter-spacing:.08em;
+  }
+  .demo-badge{
+    font-size:11px;color:var(--kaki-dark);border:1px solid var(--kaki);
+    padding:1px 8px;border-radius:999px;letter-spacing:.1em;white-space:nowrap;
+  }
+  .header-date{
+    margin-left:auto;font-size:12px;color:var(--muted);letter-spacing:.04em;
+  }
+
+  /* ===== concept ===== */
+  .concept{
+    max-width:1180px;margin:0 auto;padding:26px 24px 6px;
+  }
+  .concept p.catch{
+    font-family:'Noto Serif JP',serif;
+    font-size:21px;font-weight:600;letter-spacing:.04em;line-height:1.6;
+  }
+  .concept p.catch .accent{color:var(--kaki-dark);}
+  .concept p.sub{font-size:13px;color:var(--muted);margin-top:4px;}
+
+  /* ===== layout ===== */
+  .container{max-width:1180px;margin:0 auto;padding:18px 24px 60px;}
+
+  /* ===== summary cards ===== */
+  .summary{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px;
+  }
+  .card{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;
+    padding:18px 20px 16px;position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--kaki);
+  }
+  .card.green::before{background:var(--midori);}
+  .card.red::before{background:var(--shu);}
+  .card .label{
+    font-size:12.5px;color:var(--muted);letter-spacing:.05em;
+    display:flex;align-items:center;gap:7px;
+  }
+  .card .label svg{flex:none;}
+  .card .value{
+    font-family:'Noto Serif JP',serif;
+    font-size:32px;font-weight:700;line-height:1.25;margin-top:6px;
+  }
+  .card .value small{font-size:15px;font-weight:600;margin-left:2px;}
+  .card .note{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .card.red .value{color:var(--shu);}
+
+  /* ===== tabs ===== */
+  .view-tabs{
+    display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:18px;
+  }
+  .view-tab{
+    font-family:'Noto Serif JP',serif;
+    background:none;border:none;cursor:pointer;
+    font-size:15.5px;font-weight:600;color:var(--muted);
+    padding:10px 22px 9px;letter-spacing:.06em;
+    border-bottom:3px solid transparent;margin-bottom:-2px;
+  }
+  .view-tab.active{color:var(--sumi);border-bottom-color:var(--kaki);}
+  .view-tab:hover{color:var(--kaki-dark);}
+
+  /* ===== follow list ===== */
+  .section-head{
+    display:flex;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap;
+  }
+  .section-head h2{font-size:17px;font-weight:600;letter-spacing:.05em;}
+  .section-head .hint{font-size:12px;color:var(--muted);}
+  .follow-list{display:flex;flex-direction:column;gap:10px;}
+  .follow-row{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;
+    padding:14px 18px;display:grid;
+    grid-template-columns:minmax(150px,190px) 1fr minmax(110px,130px) auto;
+    gap:8px 18px;align-items:center;cursor:pointer;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .follow-row:hover{border-color:var(--kaki);box-shadow:0 2px 8px rgba(169,105,15,.10);}
+  .follow-row.done{opacity:.55;}
+  .f-who .name{font-family:'Noto Serif JP',serif;font-size:16.5px;font-weight:600;}
+  .f-who .meta{font-size:12px;color:var(--muted);}
+  .f-action .badge{
+    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;
+    padding:1px 9px;border-radius:999px;margin-bottom:3px;
+  }
+  .badge.overdue{background:#F7E3DD;color:var(--shu);}
+  .badge.thismonth{background:var(--kaki);color:#fff;}
+  .badge.soon{background:#F3E3C8;color:var(--kaki-dark);}
+  .f-action .text{font-size:13.5px;line-height:1.55;}
+  .f-action .elapsed{font-size:12px;color:var(--muted);}
+  .f-amount{
+    text-align:right;font-family:'Noto Serif JP',serif;
+    font-size:15px;font-weight:600;color:var(--kaki-dark);white-space:nowrap;
+  }
+  .f-amount .cap{display:block;font-family:'Noto Sans JP',sans-serif;font-size:10.5px;font-weight:400;color:var(--muted);}
+  .btn{
+    font-family:'Noto Sans JP',sans-serif;
+    border:1px solid var(--kaki);background:var(--white);color:var(--kaki-dark);
+    font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;cursor:pointer;
+    white-space:nowrap;transition:background .15s,color .15s;
+  }
+  .btn:hover{background:var(--kaki);color:#fff;}
+  .btn.primary{background:var(--kaki);color:#fff;}
+  .btn.primary:hover{background:var(--kaki-dark);border-color:var(--kaki-dark);}
+  .btn.done-btn{border-color:var(--midori);color:var(--midori);background:#EFF3F0;cursor:default;}
+
+  /* ===== all customers table ===== */
+  .filter-bar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .filter-bar input[type=text]{
+    flex:1;min-width:200px;max-width:340px;
+    border:1px solid var(--line);border-radius:6px;padding:8px 12px;
+    font-family:'Noto Sans JP',sans-serif;font-size:14px;background:var(--white);color:var(--sumi);
+  }
+  .filter-bar input[type=text]:focus,.filter-bar select:focus{outline:2px solid var(--kaki);outline-offset:0;border-color:var(--kaki);}
+  .filter-bar select{
+    border:1px solid var(--line);border-radius:6px;padding:8px 12px;
+    font-family:'Noto Sans JP',sans-serif;font-size:14px;background:var(--white);color:var(--sumi);cursor:pointer;
+  }
+  .table-wrap{
+    background:var(--white);border:1px solid var(--line);border-radius:8px;overflow-x:auto;
+  }
+  table.cust{width:100%;border-collapse:collapse;min-width:860px;}
+  table.cust th{
+    text-align:left;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;
+    padding:11px 14px;border-bottom:2px solid var(--line);background:#FCFAF4;white-space:nowrap;
+  }
+  table.cust td{
+    padding:11px 14px;border-bottom:1px solid var(--line-soft);font-size:13.5px;vertical-align:middle;
+  }
+  table.cust tr:last-child td{border-bottom:none;}
+  table.cust tbody tr{cursor:pointer;}
+  table.cust tbody tr:hover td{background:#FCF7EC;}
+  td .tname{font-family:'Noto Serif JP',serif;font-weight:600;font-size:14.5px;}
+  td .taddr{font-size:11.5px;color:var(--muted);}
+  .status-chip{
+    display:inline-block;font-size:11px;font-weight:700;padding:1px 9px;border-radius:999px;white-space:nowrap;
+  }
+  .status-chip.s-overdue{background:#F7E3DD;color:var(--shu);}
+  .status-chip.s-thismonth{background:var(--kaki);color:#fff;}
+  .status-chip.s-soon{background:#F3E3C8;color:var(--kaki-dark);}
+  .status-chip.s-later{background:#E9EFEA;color:var(--midori);}
+  .empty-msg{padding:30px;text-align:center;color:var(--muted);font-size:13.5px;}
+
+  /* ===== drawer (karte detail) ===== */
+  .overlay{
+    position:fixed;inset:0;background:rgba(42,37,32,.42);
+    opacity:0;pointer-events:none;transition:opacity .22s;z-index:40;
+  }
+  .overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);
+    background:var(--kinari);border-left:1px solid var(--line);
+    transform:translateX(102%);transition:transform .26s ease;z-index:50;
+    display:flex;flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);box-shadow:-8px 0 30px rgba(42,37,32,.16);}
+  .drawer-head{
+    background:var(--white);border-bottom:1px solid var(--line);
+    padding:18px 24px 16px;display:flex;align-items:flex-start;gap:12px;
+  }
+  .drawer-head .who h2{font-size:21px;font-weight:700;letter-spacing:.04em;line-height:1.4;}
+  .drawer-head .who .meta{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .head-btns{margin-left:auto;display:flex;gap:8px;align-items:center;flex:none;}
+  .drawer-close{
+    border:1px solid var(--line);background:var(--white);
+    width:34px;height:34px;border-radius:6px;cursor:pointer;flex:none;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+  }
+  .drawer-close:hover{border-color:var(--kaki);color:var(--kaki-dark);}
+  .drawer-body{flex:1;overflow-y:auto;padding:20px 24px 40px;}
+  .karte-note{
+    background:#EFF3F0;border-left:4px solid var(--midori);
+    padding:10px 14px;border-radius:0 6px 6px 0;font-size:13px;margin-bottom:20px;line-height:1.65;
+  }
+  .karte-note .nt{font-size:11px;font-weight:700;color:var(--midori);letter-spacing:.08em;display:block;}
+  .karte-sec{margin-bottom:26px;}
+  .karte-sec h3{
+    font-size:15px;font-weight:600;letter-spacing:.06em;margin-bottom:12px;
+    padding-bottom:6px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:8px;
+  }
+  .karte-sec h3 svg{color:var(--kaki-dark);flex:none;}
+
+  /* timeline */
+  .timeline{position:relative;padding-left:22px;}
+  .timeline::before{
+    content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line);
+  }
+  .tl-item{position:relative;padding-bottom:16px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:"";position:absolute;left:-21px;top:7px;width:10px;height:10px;border-radius:50%;
+    background:var(--white);border:3px solid var(--kaki);
+  }
+  .tl-item .tl-date{font-size:12px;font-weight:700;color:var(--kaki-dark);letter-spacing:.04em;}
+  .tl-item .tl-title{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:600;}
+  .tl-item .tl-amount{font-size:12.5px;color:var(--muted);}
+
+  /* next recommendations in drawer */
+  .rec-list{display:flex;flex-direction:column;gap:8px;}
+  .rec-item{
+    background:var(--white);border:1px solid var(--line);border-radius:6px;
+    padding:10px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  }
+  .rec-item .rec-main{flex:1;min-width:180px;}
+  .rec-item .rec-when{font-size:12px;font-weight:700;letter-spacing:.03em;}
+  .rec-item .rec-when.w-over{color:var(--shu);}
+  .rec-item .rec-when.w-now{color:var(--kaki-dark);}
+  .rec-item .rec-when.w-later{color:var(--midori);}
+  .rec-item .rec-work{font-size:14px;font-weight:500;}
+  .rec-item .rec-amount{font-size:13px;color:var(--kaki-dark);font-weight:600;white-space:nowrap;}
+
+  /* message generator */
+  .msg-area{display:none;margin-top:14px;}
+  .msg-area.open{display:block;}
+  .msg-target{margin-bottom:10px;}
+  .msg-target select{
+    width:100%;border:1px solid var(--line);border-radius:6px;padding:8px 12px;
+    font-family:'Noto Sans JP',sans-serif;font-size:13.5px;background:var(--white);color:var(--sumi);
+  }
+  .msg-tabs{display:flex;gap:6px;margin-bottom:0;}
+  .msg-tab{
+    border:1px solid var(--line);border-bottom:none;background:#F4EEE1;color:var(--muted);
+    font-family:'Noto Sans JP',sans-serif;font-size:12.5px;font-weight:500;
+    padding:7px 16px;border-radius:6px 6px 0 0;cursor:pointer;
+  }
+  .msg-tab.active{background:var(--white);color:var(--kaki-dark);font-weight:700;border-color:var(--line);}
+  .msg-body{
+    background:var(--white);border:1px solid var(--line);border-radius:0 6px 6px 6px;padding:14px;
+  }
+  .msg-text{
+    width:100%;white-space:pre-wrap;font-family:'Noto Sans JP',sans-serif;
+    font-size:13px;line-height:1.8;background:#FCFAF4;border:1px solid var(--line-soft);
+    border-radius:6px;padding:12px 14px;min-height:180px;
+  }
+  .msg-actions{display:flex;justify-content:flex-end;margin-top:10px;}
+
+  /* ===== customer status chips ===== */
+  .cs-chip{
+    display:inline-block;font-size:11px;font-weight:700;padding:1px 9px;border-radius:999px;white-space:nowrap;
+  }
+  .cs-ob{background:var(--midori);color:#fff;}
+  .cs-mikomi{background:#ECEAE3;color:#7A7062;}
+  .cs-shodan{background:var(--kaki);color:#fff;}
+  .cs-sekou{background:var(--shu);color:#fff;}
+
+  /* ===== concept import note ===== */
+  .concept p.sub-note{
+    display:inline-flex;align-items:center;gap:6px;margin-top:8px;
+    font-size:12px;color:var(--kaki-dark);background:var(--white);
+    border:1px solid var(--line);border-radius:999px;padding:3px 12px;
+  }
+  .concept p.sub-note svg{flex:none;}
+
+  /* ===== filter bar actions ===== */
+  .filter-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+  .btn svg{vertical-align:-2px;margin-right:5px;}
+  .btn.small{font-size:12px;padding:4px 12px;}
+
+  /* ===== modal ===== */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(42,37,32,.46);
+    display:none;align-items:flex-start;justify-content:center;
+    z-index:60;overflow-y:auto;padding:40px 16px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--white);border:1px solid var(--line);border-radius:10px;
+    width:100%;max-width:540px;box-shadow:0 12px 40px rgba(42,37,32,.22);
+  }
+  .modal.wide{max-width:720px;}
+  .modal-head{
+    display:flex;align-items:center;gap:10px;padding:16px 22px 13px;border-bottom:1px solid var(--line);
+  }
+  .modal-head h3{font-size:17px;font-weight:600;letter-spacing:.05em;}
+  .modal-close{
+    margin-left:auto;border:1px solid var(--line);background:var(--white);
+    width:30px;height:30px;border-radius:6px;cursor:pointer;flex:none;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+  }
+  .modal-close:hover{border-color:var(--kaki);color:var(--kaki-dark);}
+  .modal-body{padding:18px 22px 16px;}
+  .cloud-note{
+    font-size:11px;color:var(--muted);border-top:1px dashed var(--line);
+    padding-top:10px;margin-top:16px;line-height:1.6;
+  }
+  .imp-lead{font-size:13px;color:var(--sumi);margin-bottom:14px;line-height:1.7;}
+
+  /* form */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;}
+  .form-field{display:flex;flex-direction:column;gap:4px;}
+  .form-field.full{grid-column:1/-1;}
+  .form-field label{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;}
+  .form-field label .req{color:var(--shu);font-weight:700;}
+  .form-field input,.form-field select,.form-field textarea{
+    border:1px solid var(--line);border-radius:6px;padding:8px 10px;
+    font-family:'Noto Sans JP',sans-serif;font-size:13.5px;background:var(--white);color:var(--sumi);
+  }
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+    outline:2px solid var(--kaki);outline-offset:0;border-color:var(--kaki);
+  }
+  .form-field textarea{min-height:64px;resize:vertical;line-height:1.6;}
+  .form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;}
+  .form-error{font-size:12px;color:var(--shu);margin-top:8px;display:none;}
+
+  /* import modal */
+  .import-entry{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .entry-box{
+    border:1px dashed var(--kaki);border-radius:8px;padding:18px 16px 16px;
+    text-align:center;background:#FCFAF4;
+  }
+  .entry-box b{font-family:'Noto Serif JP',serif;font-size:14.5px;letter-spacing:.04em;}
+  .entry-box p{font-size:12px;color:var(--muted);margin:6px 0 12px;line-height:1.65;text-align:left;}
+  .map-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;}
+  table.map-table{border-collapse:collapse;width:100%;}
+  .map-table th{
+    background:#FCFAF4;padding:8px;border-bottom:2px solid var(--line);
+    font-size:11.5px;color:var(--muted);text-align:left;white-space:nowrap;vertical-align:top;
+  }
+  .map-table th select{
+    width:100%;min-width:110px;border:1px solid var(--line);border-radius:5px;padding:4px 6px;
+    font-family:'Noto Sans JP',sans-serif;font-size:12px;background:var(--white);color:var(--sumi);cursor:pointer;
+  }
+  .map-table th select.mapped{border-color:var(--kaki);color:var(--kaki-dark);font-weight:700;}
+  .map-table th .orig{display:block;margin-top:4px;font-weight:400;}
+  .map-table td{
+    padding:6px 8px;border-bottom:1px solid var(--line-soft);font-size:12px;white-space:nowrap;
+  }
+  .map-table tr:last-child td{border-bottom:none;}
+  .import-done{text-align:center;padding:14px 0 6px;}
+  .import-done svg{color:var(--midori);margin-bottom:8px;}
+  .import-done .big{
+    font-family:'Noto Serif JP',serif;font-size:17px;font-weight:600;letter-spacing:.03em;line-height:1.6;
+  }
+  .import-done p{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.7;}
+
+  /* drawer add-ons */
+  .next-action-row{
+    display:flex;align-items:center;gap:10px;background:var(--white);
+    border:1px solid var(--line);border-radius:6px;padding:8px 12px;
+    margin-bottom:20px;font-size:12.5px;flex-wrap:wrap;
+  }
+  .next-action-row .na-label{font-weight:700;color:var(--muted);letter-spacing:.04em;white-space:nowrap;}
+  .next-action-row input[type=date]{
+    border:1px solid var(--line);border-radius:5px;padding:4px 8px;
+    font-family:'Noto Sans JP',sans-serif;font-size:13px;background:var(--white);color:var(--sumi);
+  }
+  .inline-form{
+    display:none;background:var(--white);border:1px solid var(--line);
+    border-radius:6px;padding:12px;margin-top:10px;
+  }
+  .inline-form.open{display:block;}
+  .inline-form .row{display:flex;gap:8px;flex-wrap:wrap;}
+  .inline-form select,.inline-form input{
+    border:1px solid var(--line);border-radius:6px;padding:7px 10px;
+    font-family:'Noto Sans JP',sans-serif;font-size:13px;background:var(--white);color:var(--sumi);
+  }
+  .inline-form select:focus,.inline-form input:focus{outline:2px solid var(--kaki);outline-offset:0;border-color:var(--kaki);}
+  .inline-form .form-actions{margin-top:10px;}
+  .log-list{display:flex;flex-direction:column;gap:6px;}
+  .log-item{
+    background:var(--white);border:1px solid var(--line);border-radius:6px;
+    padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+  }
+  .log-item .ld{font-size:11.5px;font-weight:700;color:var(--kaki-dark);white-space:nowrap;}
+  .log-item .lk{
+    font-size:10.5px;font-weight:700;border:1px solid var(--line);border-radius:999px;
+    padding:0 8px;color:var(--muted);white-space:nowrap;
+  }
+  .log-item .lm{flex:1;min-width:120px;line-height:1.6;}
+  .log-empty{font-size:12.5px;color:var(--muted);padding:4px 2px;}
+
+  /* ===== footer ===== */
+  footer{
+    border-top:1px solid var(--line);padding:18px 24px 26px;text-align:center;
+  }
+  footer .demo-note{font-size:11.5px;color:var(--muted);}
+  footer .credit{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.06em;}
+
+  /* ===== responsive ===== */
+  @media (max-width:920px){
+    .summary{grid-template-columns:repeat(2,1fr);}
+    .follow-row{grid-template-columns:1fr auto;grid-template-areas:"who amount" "action action" "btn btn";}
+    .f-who{grid-area:who;}
+    .f-action{grid-area:action;}
+    .f-amount{grid-area:amount;}
+    .f-btn{grid-area:btn;justify-self:end;}
+  }
+  @media (max-width:560px){
+    body{font-size:14px;}
+    .summary{grid-template-columns:1fr 1fr;gap:10px;}
+    .card{padding:14px 14px 12px;}
+    .card .value{font-size:25px;}
+    .concept p.catch{font-size:17.5px;}
+    .header-inner{padding:12px 16px;gap:10px;}
+    .header-date{display:none;}
+    .container{padding:14px 16px 50px;}
+    .concept{padding:20px 16px 4px;}
+    .drawer-body{padding:16px 16px 36px;}
+    .drawer-head{padding:14px 16px;}
+    .view-tab{padding:9px 14px 8px;font-size:14px;}
+    .modal-overlay{padding:20px 10px;}
+    .modal-body{padding:14px 16px 14px;}
+    .form-grid{grid-template-columns:1fr;}
+    .import-entry{grid-template-columns:1fr;}
+    .filter-actions{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">柿</span>柿本ホーム産業</div>
+    <div class="tool-name">OBカルテ</div>
+    <span class="demo-badge">デモ版</span>
+    <div class="header-date" id="todayLabel"></div>
+  </div>
+</header>
+
+<div class="concept">
+  <p class="catch">新規集客より確実な、<span class="accent">“もう一度頼まれる”</span>仕組み。</p>
+  <p class="sub">過去のお客様の施工履歴から、給湯器・外壁などの更新時期を自動でお知らせ。他社に取られる前に、こちらからご案内します。</p>
+  <p class="sub-note">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+    Excelの顧客台帳を、そのまま取り込めます
+  </p>
+</div>
+
+<div class="container">
+
+  <!-- summary cards -->
+  <div class="summary" id="summaryCards">
+    <div class="card red">
+      <div class="label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        今月のフォロー推奨（期限超過含む）
+      </div>
+      <div class="value"><span id="vThisMonth">0</span><small>件</small></div>
+      <div class="note">至急ご案内をおすすめします</div>
+    </div>
+    <div class="card">
+      <div class="label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        3ヶ月以内のフォロー推奨
+      </div>
+      <div class="value"><span id="vSoon">0</span><small>件</small></div>
+      <div class="note">今月分を含む推奨時期の合計</div>
+    </div>
+    <div class="card">
+      <div class="label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l6 7 6-7M12 11v9M8 14h8M8 17h8"/></svg>
+        掘り起こし見込み額
+      </div>
+      <div class="value">約<span id="vAmount">0</span><small>万円</small></div>
+      <div class="note">推奨工事の相場合計（未対応分）</div>
+    </div>
+    <div class="card green">
+      <div class="label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+        OB顧客数
+      </div>
+      <div class="value"><span id="vTotal">0</span><small>軒</small></div>
+      <div class="note">青葉区を中心とした商圏内</div>
+    </div>
+  </div>
+
+  <!-- view tabs -->
+  <div class="view-tabs">
+    <button class="view-tab active" id="tabFollow" onclick="switchView('follow')">フォロー推奨リスト</button>
+    <button class="view-tab" id="tabAll" onclick="switchView('all')">全顧客一覧</button>
+    <button class="view-tab" id="tabEst" onclick="switchView('est')">見積・請求</button>
+  </div>
+
+  <!-- follow view -->
+  <div id="viewFollow">
+    <div class="section-head">
+      <h2 class="serif">優先度順フォローリスト</h2>
+      <span class="hint">行をクリックすると顧客カルテが開きます</span>
+    </div>
+    <div class="follow-list" id="followList"></div>
+  </div>
+
+  <!-- all customers view -->
+  <div id="viewAll" style="display:none;">
+    <div class="section-head">
+      <h2 class="serif">OB顧客台帳</h2>
+      <span class="hint">行をクリックすると顧客カルテが開きます</span>
+    </div>
+    <div class="filter-bar">
+      <input type="text" id="searchBox" placeholder="氏名・住所で検索" oninput="renderAll()">
+      <select id="areaFilter" onchange="renderAll()">
+        <option value="">すべての地区</option>
+      </select>
+      <select id="statusFilter" onchange="renderAll()">
+        <option value="">すべてのステータス</option>
+        <option value="OB">OB</option>
+        <option value="見込み">見込み</option>
+        <option value="商談中">商談中</option>
+        <option value="施工中">施工中</option>
+      </select>
+      <div class="filter-actions">
+        <button class="btn primary" onclick="openImportModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>Excelから取り込む</button>
+        <button class="btn" onclick="openCustModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.5"/><path d="M4 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M18 8v6M15 11h6"/></svg>新規顧客を登録</button>
+        <button class="btn" onclick="exportCsv()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M4 19h16"/></svg>CSV書き出し</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="cust">
+        <thead>
+          <tr>
+            <th>氏名</th><th>ステータス</th><th>地区</th><th>初回取引</th><th>施工履歴</th><th>次回推奨</th><th>状況</th>
+          </tr>
+        </thead>
+        <tbody id="allTbody"></tbody>
+      </table>
+      <div class="empty-msg" id="emptyMsg" style="display:none;">該当する顧客が見つかりません</div>
+    </div>
+  </div>
+
+  <!-- estimates view -->
+  <div id="viewEst" style="display:none;">
+    <div class="section-head">
+      <h2 class="serif">見積・請求</h2>
+      <span class="hint">「受注にする」と施工履歴に登録され、メンテ周期の管理が始まります</span>
+    </div>
+    <div class="filter-bar">
+      <div id="estSummary" style="font-size:13.5px;font-weight:500;align-self:center;"></div>
+      <div class="filter-actions">
+        <button class="btn primary" onclick="openEstModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>見積を作成</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="cust">
+        <thead>
+          <tr>
+            <th>日付</th><th>顧客</th><th>工事名</th><th>金額</th><th>ステータス</th><th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="estTbody"></tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;">明細行つきの見積書・請求書づくりは「見積カルテ」と連動します（本デモでは金額・ステータスの管理まで）。</p>
+  </div>
+
+</div>
+
+<!-- drawer -->
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="顧客カルテ">
+  <div class="drawer-head">
+    <div class="who">
+      <h2 id="dName"></h2>
+      <div class="meta" id="dMeta"></div>
+    </div>
+    <div class="head-btns">
+      <button class="btn small" onclick="openCustModal(currentCust && currentCust.id)">編集</button>
+      <button class="drawer-close" onclick="closeDrawer()" aria-label="閉じる">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="drawer-body">
+    <div class="karte-note" id="dNote" style="display:none;"></div>
+
+    <div class="next-action-row">
+      <span class="na-label">次回アクション日</span>
+      <input type="date" id="dNextAction" onchange="saveNextAction(this.value)">
+      <button class="btn small" onclick="clearNextAction()">クリア</button>
+    </div>
+
+    <div class="karte-sec">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5"/><circle cx="12" cy="14" r="2.5"/></svg>
+        施工履歴タイムライン
+      </h3>
+      <div class="timeline" id="dTimeline"></div>
+      <div style="margin-top:14px;">
+        <button class="btn" onclick="toggleInlineForm('workForm')">施工履歴を追加</button>
+      </div>
+      <div class="inline-form" id="workForm">
+        <div class="row">
+          <select id="wfType"></select>
+          <input type="month" id="wfYm">
+          <input type="number" id="wfAmount" placeholder="金額（万円）" min="0" style="width:130px;">
+        </div>
+        <div class="form-error" id="wfError">工事種別と施工年月を入力してください</div>
+        <div class="form-actions"><button class="btn primary" onclick="addWork()">追加する</button></div>
+      </div>
+    </div>
+
+    <div class="karte-sec">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg>
+        対応履歴
+      </h3>
+      <div class="log-list" id="dLogList"></div>
+      <div style="margin-top:12px;">
+        <button class="btn" onclick="toggleInlineForm('logForm')">対応を記録</button>
+      </div>
+      <div class="inline-form" id="logForm">
+        <div class="row">
+          <select id="lfKind">
+            <option>電話</option><option>訪問</option><option>メール</option><option>LINE</option><option>その他</option>
+          </select>
+          <input type="text" id="lfMemo" placeholder="メモ（例: 留守、見積提出）" style="flex:1;min-width:170px;">
+        </div>
+        <div class="form-actions"><button class="btn primary" onclick="addLog()">記録する</button></div>
+      </div>
+    </div>
+
+    <div class="karte-sec">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+        お見積り
+      </h3>
+      <div class="log-list" id="dEstList"></div>
+      <div style="margin-top:12px;">
+        <button class="btn" onclick="openEstModal(currentCust && currentCust.id)">この顧客に見積を作成</button>
+      </div>
+    </div>
+
+    <div class="karte-sec">
+      <h3>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>
+        次回推奨一覧
+      </h3>
+      <div class="rec-list" id="dRecList"></div>
+      <div style="margin-top:14px;">
+        <button class="btn primary" id="msgOpenBtn" onclick="toggleMsgArea()">ご案内文を作成</button>
+      </div>
+
+      <div class="msg-area" id="msgArea">
+        <div class="msg-target">
+          <select id="msgTarget" onchange="renderMessage()"></select>
+        </div>
+        <div class="msg-tabs">
+          <button class="msg-tab active" data-ch="hagaki" onclick="switchMsgTab('hagaki')">ハガキ文面</button>
+          <button class="msg-tab" data-ch="phone" onclick="switchMsgTab('phone')">電話トーク</button>
+          <button class="msg-tab" data-ch="line" onclick="switchMsgTab('line')">LINE文面</button>
+        </div>
+        <div class="msg-body">
+          <div class="msg-text" id="msgText"></div>
+          <div class="msg-actions">
+            <button class="btn" id="copyBtn" onclick="copyMessage()">コピー</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- import modal -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal wide">
+    <div class="modal-head">
+      <h3 class="serif">Excel台帳の取り込み</h3>
+      <button class="modal-close" onclick="closeImportModal()" aria-label="閉じる">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="file" id="csvFile" accept=".csv,text/csv" style="display:none;" onchange="handleFile(this.files[0]); this.value='';">
+
+      <div id="impStep1">
+        <p class="imp-lead">いまお使いのExcel台帳を、そのまま取り込めます。Excel側で「名前を付けて保存 → CSV」にしたファイルをご用意ください。列の対応づけは次の画面で選ぶだけです。</p>
+        <div class="import-entry">
+          <div class="entry-box">
+            <b>お手元のファイルから</b>
+            <p>CSVファイルを選択してください。文字コード（Shift_JIS／UTF-8）は自動で判別します。</p>
+            <button class="btn primary" onclick="document.getElementById('csvFile').click()">ファイルを選ぶ</button>
+          </div>
+          <div class="entry-box">
+            <b>まずは体験</b>
+            <p>架空の顧客5件が入ったサンプル台帳で、取り込みの流れをご覧いただけます。</p>
+            <button class="btn" onclick="loadSampleCsv()">サンプルExcelで試す</button>
+          </div>
+        </div>
+        <div class="form-error" id="impError">ファイルを読み取れませんでした。CSV形式かご確認ください。</div>
+        <div class="cloud-note">実製品ではクラウドに保存され、社内の誰からも閲覧できます。本デモではブラウザを閉じると消えます。</div>
+      </div>
+
+      <div id="impStep2" style="display:none;">
+        <p class="imp-lead">各列に何が入っているかを選んでください（先頭5行のプレビュー）。よくある列名は自動で認識しています。</p>
+        <div class="map-table-wrap">
+          <table class="map-table">
+            <thead><tr id="mapHeadRow"></tr></thead>
+            <tbody id="mapBody"></tbody>
+          </table>
+        </div>
+        <div class="form-error" id="mapError">「氏名」を割り当てる列を選択してください</div>
+        <div class="form-actions">
+          <button class="btn" onclick="impBackToStep1()">戻る</button>
+          <button class="btn primary" onclick="doImport()">取り込む</button>
+        </div>
+        <div class="cloud-note">実製品ではクラウドに保存され、社内の誰からも閲覧できます。本デモではブラウザを閉じると消えます。</div>
+      </div>
+
+      <div id="impStep3" style="display:none;">
+        <div class="import-done">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+          <div class="big" id="impDoneMsg"></div>
+          <p>全顧客一覧とサマリー、フォロー推奨リストに反映しました。<br>施工内容と施工年月から、メンテナンス時期も自動で算出しています。</p>
+        </div>
+        <div class="form-actions"><button class="btn primary" onclick="closeImportModal()">一覧を見る</button></div>
+        <div class="cloud-note">実製品ではクラウドに保存され、社内の誰からも閲覧できます。本デモではブラウザを閉じると消えます。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- customer form modal -->
+<div class="modal-overlay" id="custModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="serif" id="custModalTitle">新規顧客を登録</h3>
+      <button class="modal-close" onclick="closeCustModal()" aria-label="閉じる">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field"><label>氏名 <span class="req">*</span></label><input id="cfName" placeholder="例: 柿本 太郎"></div>
+        <div class="form-field"><label>ふりがな</label><input id="cfKana" placeholder="例: かきもと たろう"></div>
+        <div class="form-field full"><label>住所</label><input id="cfAddress" placeholder="例: 横浜市青葉区しらとり台0-0-0"></div>
+        <div class="form-field"><label>電話</label><input id="cfPhone" placeholder="例: 045-000-0000"></div>
+        <div class="form-field"><label>メール</label><input id="cfEmail" placeholder="例: taro@example.com"></div>
+        <div class="form-field"><label>ステータス</label>
+          <select id="cfStatus">
+            <option>OB</option><option>見込み</option><option>商談中</option><option>施工中</option>
+          </select>
+        </div>
+        <div class="form-field full"><label>家族メモ・備考</label><textarea id="cfNote" placeholder="ご家族構成、お付き合いの経緯など"></textarea></div>
+      </div>
+      <div class="form-error" id="cfError">氏名を入力してください</div>
+      <div class="form-actions">
+        <button class="btn" onclick="closeCustModal()">キャンセル</button>
+        <button class="btn primary" onclick="saveCustomer()">保存する</button>
+      </div>
+      <div class="cloud-note">実製品ではクラウドに保存され、社内の誰からも閲覧できます。本デモではブラウザを閉じると消えます。</div>
+    </div>
+  </div>
+</div>
+
+<!-- estimate form modal -->
+<div class="modal-overlay" id="estModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="serif">見積を作成</h3>
+      <button class="modal-close" onclick="closeEstModal()" aria-label="閉じる">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-field full"><label>顧客 <span class="req">*</span></label>
+          <select id="efCust"></select>
+        </div>
+        <div class="form-field full"><label>工事名 <span class="req">*</span></label><input id="efTitle" placeholder="例: 浴室リフォーム工事"></div>
+        <div class="form-field"><label>工事種別（周期判定用）</label>
+          <select id="efType"></select>
+        </div>
+        <div class="form-field"><label>見積金額（万円）</label><input type="number" id="efAmount" min="0" placeholder="例: 120"></div>
+      </div>
+      <div class="form-error" id="efError">顧客と工事名を入力してください</div>
+      <div class="form-actions">
+        <button class="btn" onclick="closeEstModal()">キャンセル</button>
+        <button class="btn primary" onclick="saveEstimate()">提出済みとして登録</button>
+      </div>
+      <div class="cloud-note">実製品では明細行・帳票印刷つきの見積機能（見積カルテ）と連動します。本デモではブラウザを閉じると消えます。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="demo-note">このツールはデモです。サンプルデータは架空のものです。</div>
+  <div class="credit">OBカルテ — 柿本ホーム産業 様向けデモ ／ 制作: SafariTech</div>
+</footer>
+
+<script>
+/* ============================================================
+   メンテナンス周期マスタ
+   ============================================================ */
+const MAINT = {
+  '給湯器交換':          { years:10, min:35,  max:50,  action:'給湯器の設置から{y}年。交換のご案内時期です',
+    reason:'給湯器は10年を超えると故障や急な停止が増えてまいります。お湯が使えなくなる前の計画的な交換をおすすめしております。' },
+  '外壁塗装':            { years:12, min:90,  max:130, action:'外壁塗装から{y}年。塗り替えのご案内時期です',
+    reason:'塗膜の防水性能が低下し、ひび割れやチョーキング（白い粉）が出やすい時期でございます。建物を長持ちさせるためにも点検をおすすめいたします。' },
+  '屋根塗装・補修':      { years:12, min:60,  max:90,  action:'屋根の施工から{y}年。点検・塗り替えのご案内時期です',
+    reason:'屋根材の劣化が進みますと雨漏りの原因となります。台風シーズンの前に一度点検させていただければ安心です。' },
+  'ベランダ防水':        { years:10, min:15,  max:25,  action:'防水施工から{y}年。再施工のご案内時期です',
+    reason:'防水層が耐用年数を迎えますと、階下への雨漏りにつながるおそれがございます。傷みが小さいうちの再施工が結果的にお安く済みます。' },
+  'ユニットバスのコーキング': { years:10, min:3, max:6, action:'コーキング施工から{y}年。打ち直しのご案内時期です',
+    reason:'コーキングの劣化は水漏れやカビの原因になります。半日程度の工事で打ち直しが可能でございます。' },
+  'シロアリ防除':        { years:5,  min:12,  max:20,  action:'防除施工から{y}年。再施工のご案内時期です',
+    reason:'防除薬剤の効果はおよそ5年で切れてまいります。被害が出る前の再施工をおすすめしております。' },
+  'キッチン交換':        { years:20, min:80,  max:150, action:'キッチン設置から{y}年。交換のご検討時期です',
+    reason:'設備の交換目安を迎えております。最近のキッチンはお手入れも省エネ性能も格段に良くなっております。' },
+  'クロス張替':          { years:10, min:25,  max:45,  action:'張替から{y}年。張替のご案内時期です',
+    reason:'クロスの黄ばみや継ぎ目の浮きが目立ちやすい時期でございます。他のリフォームとあわせると割安に承れます。' },
+  '給排水管点検':        { years:15, min:5,   max:10,  action:'前回点検から{y}年。点検のご案内時期です',
+    reason:'配管の経年劣化は外から見えないまま進行いたします。漏水になる前の予防点検をおすすめしております。' },
+};
+
+/* ============================================================
+   サンプル顧客データ（24件・架空）
+   基準: 2026年6月時点で「今月〜3ヶ月以内」が7件になるよう施工年月を設定
+   ============================================================ */
+const customers = [
+  { id:1,  name:'佐藤 一郎', area:'青葉区', address:'横浜市青葉区美しが丘2丁目', first:1972,
+    note:'お父様の代からのお付き合い。1972年に先代様のご自宅を新築、2008年に建て替えを担当。',
+    works:[
+      { type:'建替え新築（軽量鉄骨）', ym:'2008-05', amount:2800 },
+      { type:'給湯器交換',             ym:'2016-07', amount:38 },
+    ],
+    logs:[
+      { date:'2026/05/22', kind:'電話', memo:'奥様とお話。給湯器点検は6月上旬希望とのこと' },
+      { date:'2026/05/12', kind:'電話', memo:'留守。夕方に再度かける' },
+    ]},
+  { id:2,  name:'鈴木 健司', area:'青葉区', address:'横浜市青葉区あざみ野1丁目', first:2002,
+    works:[
+      { type:'注文住宅新築',           ym:'2002-04', amount:2450 },
+      { type:'外壁塗装',               ym:'2014-06', amount:105 },
+    ]},
+  { id:3,  name:'高橋 美代子', area:'緑区', address:'横浜市緑区長津田5丁目', first:1998,
+    note:'二世帯住宅。息子様ご家族と同居。お庭の手入れの話題がお好き。',
+    works:[
+      { type:'キッチン交換',           ym:'2010-09', amount:96 },
+      { type:'シロアリ防除',           ym:'2021-08', amount:14 },
+    ]},
+  { id:4,  name:'田中 誠', area:'都筑区', address:'横浜市都筑区荏田東3丁目', first:1989, status:'商談中', nextAction:'2026-06-17',
+    note:'親子二代でのお付き合い。娘様が市ケ尾で新築をご検討中との話あり（2025年末時点）。',
+    works:[
+      { type:'増築工事（和室6帖）',     ym:'2005-11', amount:480 },
+      { type:'ベランダ防水',           ym:'2016-06', amount:18 },
+    ],
+    logs:[
+      { date:'2026/05/20', kind:'訪問', memo:'娘様の新築の件で見積を提出。来月返事をいただく' },
+      { date:'2026/05/09', kind:'メール', memo:'市ケ尾の土地資料を送付' },
+      { date:'2026/04/22', kind:'訪問', memo:'娘様の新築のご要望をヒアリング' },
+    ]},
+  { id:5,  name:'渡辺 洋子', area:'町田市', address:'町田市成瀬7丁目', first:2010,
+    works:[
+      { type:'浴室リフォーム',         ym:'2010-03', amount:110 },
+      { type:'給湯器交換',             ym:'2016-08', amount:36 },
+    ]},
+  { id:6,  name:'伊藤 隆', area:'青葉区', address:'横浜市青葉区青葉台2丁目', first:1995,
+    note:'ご近所のご紹介を多数いただいている。元町内会長。',
+    works:[
+      { type:'注文住宅新築',           ym:'1995-06', amount:2680 },
+      { type:'屋根塗装・補修',         ym:'2014-07', amount:72 },
+    ]},
+  { id:7,  name:'山本 幸子', area:'川崎市', address:'川崎市宮前区宮前平1丁目', first:2006,
+    works:[
+      { type:'全面リフォーム',         ym:'2006-10', amount:850 },
+      { type:'ユニットバスのコーキング', ym:'2016-06', amount:4 },
+    ],
+    logs:[
+      { date:'2026/05/18', kind:'電話', memo:'留守。LINEで案内済みのため今月末まで様子見' },
+      { date:'2026/05/02', kind:'LINE', memo:'コーキング点検のご案内を送付。既読のみ' },
+    ]},
+  { id:8,  name:'中村 修', area:'青葉区', address:'横浜市青葉区市ケ尾町', first:2003,
+    works:[
+      { type:'クロス張替',             ym:'2016-01', amount:32 },
+      { type:'トイレ交換',             ym:'2019-09', amount:28 },
+    ]},
+  { id:9,  name:'小林 たか子', area:'緑区', address:'横浜市緑区十日市場町', first:1999,
+    note:'お母様の代からのお付き合い。定期的にお歳暮をいただいている。',
+    works:[
+      { type:'新築（軽量鉄骨）',       ym:'1999-07', amount:2300 },
+      { type:'給排水管点検',           ym:'2011-02', amount:6 },
+    ]},
+  { id:10, name:'加藤 正人', area:'青葉区', address:'横浜市青葉区藤が丘2丁目', first:2007,
+    works:[
+      { type:'外壁塗装',               ym:'2019-04', amount:98 },
+    ]},
+  { id:11, name:'吉田 直樹', area:'都筑区', address:'横浜市都筑区中川中央1丁目', first:2015, status:'商談中',
+    works:[
+      { type:'中古住宅リノベーション', ym:'2015-05', amount:720 },
+      { type:'給湯器交換',             ym:'2022-10', amount:41 },
+    ]},
+  { id:12, name:'山田 京子', area:'青葉区', address:'横浜市青葉区美しが丘西2丁目', first:1992,
+    works:[
+      { type:'注文住宅新築',           ym:'1992-10', amount:2150 },
+      { type:'キッチン交換',           ym:'2018-03', amount:124 },
+      { type:'クロス張替',             ym:'2023-05', amount:38 },
+    ]},
+  { id:13, name:'佐々木 茂', area:'緑区', address:'横浜市緑区中山4丁目', first:2011,
+    works:[
+      { type:'シロアリ防除',           ym:'2024-11', amount:16 },
+    ]},
+  { id:14, name:'山口 恵', area:'町田市', address:'町田市玉川学園3丁目', first:2004,
+    works:[
+      { type:'給湯器交換',             ym:'2016-11', amount:37 },
+    ]},
+  { id:15, name:'松本 和夫', area:'川崎市', address:'川崎市麻生区王禅寺東4丁目', first:2001,
+    works:[
+      { type:'外壁塗装',               ym:'2015-09', amount:112 },
+      { type:'屋根塗装・補修',         ym:'2015-09', amount:68 },
+    ]},
+  { id:16, name:'井上 清美', area:'青葉区', address:'横浜市青葉区すすき野2丁目', first:2009,
+    works:[
+      { type:'ベランダ防水',           ym:'2017-02', amount:21 },
+    ]},
+  { id:17, name:'木村 大輔', area:'青葉区', address:'横浜市青葉区奈良町', first:2012,
+    works:[
+      { type:'注文住宅新築',           ym:'2012-08', amount:2580 },
+      { type:'シロアリ防除',           ym:'2022-06', amount:15 },
+    ]},
+  { id:18, name:'林 文子', area:'緑区', address:'横浜市緑区長津田みなみ台5丁目', first:2016,
+    works:[
+      { type:'クロス張替',             ym:'2021-09', amount:30 },
+    ]},
+  { id:19, name:'斎藤 勝', area:'都筑区', address:'横浜市都筑区荏田南3丁目', first:2008,
+    works:[
+      { type:'給排水管点検',           ym:'2014-10', amount:7 },
+    ]},
+  { id:20, name:'清水 信子', area:'青葉区', address:'横浜市青葉区もえぎ野', first:1996,
+    works:[
+      { type:'屋根塗装・補修',         ym:'2017-08', amount:78 },
+    ]},
+  { id:21, name:'森 健一', area:'町田市', address:'町田市つくし野2丁目', first:2013,
+    works:[
+      { type:'給湯器交換',             ym:'2018-12', amount:39 },
+    ]},
+  { id:22, name:'池田 良子', area:'川崎市', address:'川崎市宮前区鷺沼3丁目', first:2005,
+    works:[
+      { type:'外壁塗装',               ym:'2023-03', amount:118 },
+    ]},
+  { id:23, name:'橋本 三郎', area:'青葉区', address:'横浜市青葉区荏田西1丁目', first:1985,
+    note:'お母様の代から三代にわたるお付き合い。お孫様の代のリフォーム相談も期待できる。',
+    works:[
+      { type:'キッチン交換',           ym:'2016-04', amount:132 },
+      { type:'給湯器交換',             ym:'2019-07', amount:40 },
+    ]},
+  { id:24, name:'阿部 由美', area:'緑区', address:'横浜市緑区霧が丘3丁目', first:2018,
+    works:[
+      { type:'クロス張替',             ym:'2024-02', amount:34 },
+    ]},
+];
+
+/* ============================================================
+   計算ロジック
+   ============================================================ */
+const today = new Date();
+const nowY = today.getFullYear();
+const nowM = today.getMonth() + 1; // 1-12
+
+function parseYM(ym){ const [y,m] = ym.split('-').map(Number); return {y, m}; }
+function fmtYM(y, m){ return y + '年' + m + '月'; }
+function addYears(y, m, n){ return { y: y + n, m: m }; }
+function monthDiff(dueY, dueM){ return (dueY - nowY) * 12 + (dueM - nowM); }
+function elapsedYears(y, m){
+  let e = nowY - y;
+  if (nowM < m) e -= 1;
+  return e;
+}
+
+// 推奨アイテム一覧を構築（メンテ周期マスタに該当する施工のみ）
+// handled: 「対応する」で消し込んだ状態
+// 顧客や施工履歴の追加・取り込み後に再構築できるよう関数化（消し込み状態は維持）
+let recItems = [];
+function buildRecItems(){
+  const handledKeys = new Set(recItems.filter(it => it.handled).map(it => it.key));
+  recItems = [];
+  customers.forEach(c => {
+    c.works.forEach((w, wi) => {
+      const m = MAINT[w.type];
+      if (!m) return;
+      const src = parseYM(w.ym);
+      const due = addYears(src.y, src.m, m.years);
+      const diff = monthDiff(due.y, due.m);
+      const key = c.id + '-' + wi;
+      recItems.push({
+        key: key,
+        cust: c, work: w, maint: m,
+        srcY: src.y, srcM: src.m,
+        dueY: due.y, dueM: due.m,
+        diff: diff,
+        mid: (m.min + m.max) / 2,
+        handled: handledKeys.has(key),
+      });
+    });
+  });
+}
+buildRecItems();
+
+function statusOf(item){
+  if (item.diff < 0) return 'overdue';
+  if (item.diff === 0) return 'thismonth';
+  if (item.diff <= 3) return 'soon';
+  return 'later';
+}
+function statusLabel(item){
+  const s = statusOf(item);
+  if (s === 'overdue')  return '期限超過 ' + (-item.diff) + 'ヶ月';
+  if (s === 'thismonth') return '今月';
+  if (s === 'soon')     return item.diff + 'ヶ月後';
+  return fmtYM(item.dueY, item.dueM);
+}
+
+// フォロー対象 = 期限超過 + 3ヶ月以内
+function followItems(){
+  return recItems
+    .filter(it => it.diff <= 3)
+    .sort((a, b) => a.diff - b.diff || b.mid - a.mid);
+}
+
+/* ============================================================
+   サマリー
+   ============================================================ */
+function renderSummary(){
+  const list = followItems().filter(it => !it.handled);
+  const thisMonth = list.filter(it => it.diff <= 0).length;
+  const soon = list.filter(it => it.diff >= 0).length;
+  const amount = Math.round(list.reduce((s, it) => s + it.mid, 0));
+  document.getElementById('vThisMonth').textContent = thisMonth;
+  document.getElementById('vSoon').textContent = soon;
+  document.getElementById('vAmount').textContent = amount.toLocaleString();
+  document.getElementById('vTotal').textContent = customers.length;
+}
+
+/* ============================================================
+   フォロー推奨リスト
+   ============================================================ */
+function renderFollow(){
+  const wrap = document.getElementById('followList');
+  wrap.innerHTML = '';
+  followItems().forEach(it => {
+    const s = statusOf(it);
+    const row = document.createElement('div');
+    row.className = 'follow-row' + (it.handled ? ' done' : '');
+    row.onclick = () => openDrawer(it.cust.id);
+
+    const badgeClass = s === 'overdue' ? 'overdue' : (s === 'thismonth' ? 'thismonth' : 'soon');
+    const badgeText = s === 'overdue' ? '期限超過（' + (-it.diff) + 'ヶ月）'
+                    : s === 'thismonth' ? '今月が推奨時期'
+                    : it.diff + 'ヶ月後に推奨時期';
+    const elapsed = elapsedYears(it.srcY, it.srcM);
+    const action = it.maint.action.replace('{y}', it.maint.years);
+
+    row.innerHTML =
+      '<div class="f-who">' +
+        '<div class="name">' + it.cust.name + ' 様</div>' +
+        '<div class="meta">' + it.cust.area + '／初回取引 ' + it.cust.first + '年</div>' +
+      '</div>' +
+      '<div class="f-action">' +
+        '<span class="badge ' + badgeClass + '">' + badgeText + '</span>' +
+        '<div class="text">' + action + '（' + fmtYM(it.srcY, it.srcM) + ' 施工）</div>' +
+        '<div class="elapsed">最終施工から ' + elapsed + '年経過 ・ 推奨時期 ' + fmtYM(it.dueY, it.dueM) + '</div>' +
+      '</div>' +
+      '<div class="f-amount">' + it.maint.min + '〜' + it.maint.max + '万円<span class="cap">見込み金額帯（相場）</span></div>' +
+      '<div class="f-btn"></div>';
+
+    const btn = document.createElement('button');
+    if (it.handled) {
+      btn.className = 'btn done-btn';
+      btn.textContent = '対応済み';
+    } else {
+      btn.className = 'btn primary';
+      btn.textContent = '対応する';
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        it.handled = true;
+        if (!it.cust.logs) it.cust.logs = [];
+        it.cust.logs.unshift({ date: fmtToday(), kind: 'フォロー', memo: it.work.type + 'のフォロー案内を実施（対応済み）' });
+        renderSummary(); renderFollow(); renderAll();
+      };
+    }
+    row.querySelector('.f-btn').appendChild(btn);
+    wrap.appendChild(row);
+  });
+}
+
+/* ============================================================
+   全顧客一覧
+   ============================================================ */
+function nextDueOf(c){
+  const items = recItems.filter(it => it.cust.id === c.id).sort((a, b) => a.diff - b.diff);
+  return items.length ? items[0] : null;
+}
+
+const CSTAT_CLS = { 'OB': 'cs-ob', '見込み': 'cs-mikomi', '商談中': 'cs-shodan', '施工中': 'cs-sekou' };
+function custStatusChip(c){
+  const s = c.status || 'OB';
+  return '<span class="cs-chip ' + (CSTAT_CLS[s] || 'cs-ob') + '">' + s + '</span>';
+}
+
+function renderAll(){
+  const q = document.getElementById('searchBox').value.trim();
+  const area = document.getElementById('areaFilter').value;
+  const stf = document.getElementById('statusFilter').value;
+  const tbody = document.getElementById('allTbody');
+  tbody.innerHTML = '';
+  let count = 0;
+
+  customers.forEach(c => {
+    if (area && c.area !== area) return;
+    if (stf && (c.status || 'OB') !== stf) return;
+    if (q && c.name.indexOf(q) === -1 && c.address.indexOf(q) === -1) return;
+    count++;
+
+    const nd = nextDueOf(c);
+    let dueText = '—', chip = '';
+    if (nd) {
+      const s = statusOf(nd);
+      dueText = nd.work.type + '（' + fmtYM(nd.dueY, nd.dueM) + '）';
+      const cls = s === 'overdue' ? 's-overdue' : s === 'thismonth' ? 's-thismonth' : s === 'soon' ? 's-soon' : 's-later';
+      const lbl = nd.handled ? '対応済み' : statusLabel(nd);
+      chip = '<span class="status-chip ' + cls + '">' + lbl + '</span>';
+    } else {
+      chip = '<span class="status-chip s-later">予定なし</span>';
+    }
+
+    const tr = document.createElement('tr');
+    tr.onclick = () => openDrawer(c.id);
+    const naText = c.nextAction ? '<div class="taddr">次回 ' + c.nextAction.replace(/-/g, '/') + '</div>' : '';
+    tr.innerHTML =
+      '<td><div class="tname">' + c.name + ' 様</div><div class="taddr">' + c.address + '</div></td>' +
+      '<td>' + custStatusChip(c) + naText + '</td>' +
+      '<td>' + c.area + '</td>' +
+      '<td>' + c.first + '年</td>' +
+      '<td>' + c.works.length + '件</td>' +
+      '<td>' + dueText + '</td>' +
+      '<td>' + chip + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('emptyMsg').style.display = count ? 'none' : 'block';
+}
+
+/* ============================================================
+   タブ切替
+   ============================================================ */
+function switchView(v){
+  document.getElementById('viewFollow').style.display = v === 'follow' ? 'block' : 'none';
+  document.getElementById('viewAll').style.display = v === 'all' ? 'block' : 'none';
+  document.getElementById('viewEst').style.display = v === 'est' ? 'block' : 'none';
+  document.getElementById('tabFollow').classList.toggle('active', v === 'follow');
+  document.getElementById('tabAll').classList.toggle('active', v === 'all');
+  document.getElementById('tabEst').classList.toggle('active', v === 'est');
+  if (v === 'est') renderEstimates();
+}
+
+/* ============================================================
+   顧客カルテ ドロワー
+   ============================================================ */
+let currentCust = null;
+let currentChannel = 'hagaki';
+
+function openDrawer(custId){
+  const c = customers.find(x => x.id === custId);
+  if (!c) return;
+  currentCust = c;
+
+  document.getElementById('dName').textContent = c.name + ' 様';
+  document.getElementById('dMeta').textContent = c.address + '　初回取引 ' + c.first + '年';
+
+  const noteEl = document.getElementById('dNote');
+  if (c.note) {
+    noteEl.style.display = 'block';
+    noteEl.innerHTML = '<span class="nt">家族メモ・備考</span>' + c.note;
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  // タイムライン（新しい順）
+  const tl = document.getElementById('dTimeline');
+  tl.innerHTML = '';
+  [...c.works].sort((a, b) => b.ym.localeCompare(a.ym)).forEach(w => {
+    const p = parseYM(w.ym);
+    const div = document.createElement('div');
+    div.className = 'tl-item';
+    div.innerHTML =
+      '<div class="tl-date">' + fmtYM(p.y, p.m) + '</div>' +
+      '<div class="tl-title">' + w.type + '</div>' +
+      '<div class="tl-amount">施工金額 ' + w.amount.toLocaleString() + '万円</div>';
+    tl.appendChild(div);
+  });
+
+  // 次回推奨一覧
+  const recList = document.getElementById('dRecList');
+  recList.innerHTML = '';
+  const items = recItems.filter(it => it.cust.id === c.id).sort((a, b) => a.diff - b.diff);
+  if (items.length === 0) {
+    recList.innerHTML = '<div class="rec-item"><div class="rec-main">メンテナンス周期に該当する施工履歴がありません。定期点検のご案内をご検討ください。</div></div>';
+  } else {
+    items.forEach(it => {
+      const s = statusOf(it);
+      const wcls = (s === 'overdue') ? 'w-over' : (s === 'thismonth' || s === 'soon') ? 'w-now' : 'w-later';
+      const div = document.createElement('div');
+      div.className = 'rec-item';
+      div.innerHTML =
+        '<div class="rec-main">' +
+          '<div class="rec-when ' + wcls + '">' + fmtYM(it.dueY, it.dueM) + '　' + statusLabel(it) + (it.handled ? '（対応済み）' : '') + '</div>' +
+          '<div class="rec-work">' + it.work.type + '　<span style="font-size:12px;color:var(--muted);">' + fmtYM(it.srcY, it.srcM) + ' 施工・周期' + it.maint.years + '年</span></div>' +
+        '</div>' +
+        '<div class="rec-amount">' + it.maint.min + '〜' + it.maint.max + '万円</div>';
+      recList.appendChild(div);
+    });
+  }
+
+  // 案内文ターゲット選択
+  const sel = document.getElementById('msgTarget');
+  sel.innerHTML = '';
+  items.forEach(it => {
+    const opt = document.createElement('option');
+    opt.value = it.key;
+    opt.textContent = it.work.type + '（' + fmtYM(it.srcY, it.srcM) + ' 施工 → 推奨 ' + fmtYM(it.dueY, it.dueM) + '）';
+    sel.appendChild(opt);
+  });
+  document.getElementById('msgOpenBtn').style.display = items.length ? 'inline-block' : 'none';
+  document.getElementById('msgArea').classList.remove('open');
+
+  // 対応履歴・見積・次回アクション日・インラインフォームの初期化
+  renderLogs(c);
+  renderDrawerEst(c);
+  document.getElementById('dNextAction').value = c.nextAction || '';
+  document.getElementById('workForm').classList.remove('open');
+  document.getElementById('logForm').classList.remove('open');
+  document.getElementById('wfError').style.display = 'none';
+
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+
+function renderLogs(c){
+  const list = document.getElementById('dLogList');
+  list.innerHTML = '';
+  const logs = c.logs || [];
+  if (!logs.length) {
+    list.innerHTML = '<div class="log-empty">まだ対応履歴がありません。「対応を記録」から追加できます。</div>';
+    return;
+  }
+  logs.forEach(l => {
+    const div = document.createElement('div');
+    div.className = 'log-item';
+    div.innerHTML = '<span class="ld">' + l.date + '</span><span class="lk">' + l.kind + '</span><span class="lm">' + l.memo + '</span>';
+    list.appendChild(div);
+  });
+}
+
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+/* ============================================================
+   ご案内文ジェネレーター
+   ============================================================ */
+function toggleMsgArea(){
+  const area = document.getElementById('msgArea');
+  area.classList.toggle('open');
+  if (area.classList.contains('open')) renderMessage();
+}
+
+function switchMsgTab(ch){
+  currentChannel = ch;
+  document.querySelectorAll('.msg-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.ch === ch);
+  });
+  renderMessage();
+}
+
+function currentMsgItem(){
+  const key = document.getElementById('msgTarget').value;
+  return recItems.find(it => it.key === key) || null;
+}
+
+function buildMessage(it, ch){
+  const c = it.cust;
+  const when = fmtYM(it.srcY, it.srcM);
+  const cyc = it.maint.years;
+  const work = it.work.type;
+  const reason = it.maint.reason;
+
+  if (ch === 'hagaki') {
+    return c.name + ' 様\n\n' +
+      'いつも大変お世話になっております。柿本ホーム産業でございます。\n\n' +
+      when + 'に施工させていただきました「' + work + '」が、まもなく' + cyc + '年の節目を迎えます。\n' +
+      reason + '\n\n' +
+      '点検・お見積りは無料にて承っております。ご都合のよろしい日時をお知らせいただけましたら、担当者がお伺いいたします。\n\n' +
+      '創業1965年、青葉区の地で皆様のお住まいを守ってまいりました。今後とも末永くお付き合いのほど、よろしくお願い申し上げます。\n\n' +
+      '柿本ホーム産業株式会社\n' +
+      '横浜市青葉区しらとり台0-0-0\n' +
+      'TEL 045-000-0000（営業時間 9:00〜18:00）';
+  }
+  if (ch === 'phone') {
+    return '【電話トークスクリプト】\n\n' +
+      '「お世話になっております。柿本ホーム産業の◯◯と申します。' + c.name + '様のお宅でいつもお世話になっております」\n\n' +
+      '（ご本人確認後）\n' +
+      '「実は、' + when + 'に' + work + 'の工事をさせていただいてから、まもなく' + cyc + '年になります。' + reason + '」\n\n' +
+      '「つきましては、一度無料で点検にお伺いできればと思っております。来週あたりでご都合のよい日はございますでしょうか」\n\n' +
+      '＜想定問答＞\n' +
+      '・「まだ大丈夫」→「かしこまりました。不具合が出る前のほうが費用を抑えられますので、気になることがあればいつでもお電話ください」\n' +
+      '・「他社の見積りがある」→「ぜひ比較なさってください。当社は施工当時の図面と記録が残っておりますので、無駄のないご提案ができます」';
+  }
+  // LINE
+  return c.name + '様\n\n' +
+    'いつもお世話になっております。柿本ホーム産業です。\n\n' +
+    when + 'に施工いたしました「' + work + '」が、まもなく' + cyc + '年を迎えます。\n' +
+    reason + '\n\n' +
+    '無料点検を承っておりますので、ご希望でしたらこのままご返信ください。お電話（045-000-0000）でも結構です。\n\n' +
+    '今後ともよろしくお願いいたします。';
+}
+
+function renderMessage(){
+  const it = currentMsgItem();
+  const el = document.getElementById('msgText');
+  el.textContent = it ? buildMessage(it, currentChannel) : '';
+}
+
+function copyMessage(){
+  const text = document.getElementById('msgText').textContent;
+  const btn = document.getElementById('copyBtn');
+  const done = () => {
+    btn.textContent = 'コピーしました';
+    setTimeout(() => { btn.textContent = 'コピー'; }, 1600);
+  };
+  const fallback = () => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    done();
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(fallback);
+  } else {
+    fallback();
+  }
+}
+
+/* ============================================================
+   CRM: 共通ユーティリティ
+   ============================================================ */
+function fmtToday(){
+  return nowY + '/' + String(nowM).padStart(2, '0') + '/' + String(today.getDate()).padStart(2, '0');
+}
+function nextId(){ return customers.reduce((m, c) => Math.max(m, c.id), 0) + 1; }
+function areaOf(address){
+  if (!address) return null;
+  const m = address.match(/(青葉区|緑区|都筑区|町田市|川崎市|宮前区|麻生区)/);
+  if (!m) return null;
+  return (m[1] === '宮前区' || m[1] === '麻生区') ? '川崎市' : m[1];
+}
+function refreshAreaFilter(){
+  const sel = document.getElementById('areaFilter');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">すべての地区</option>';
+  [...new Set(customers.map(c => c.area))].forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a; opt.textContent = a;
+    sel.appendChild(opt);
+  });
+  sel.value = cur;
+}
+function rerenderEverything(){
+  buildRecItems();
+  renderSummary();
+  renderFollow();
+  renderAll();
+  refreshAreaFilter();
+}
+
+/* ============================================================
+   CRM: ドロワー内フォーム（施工履歴追加・対応記録・次回アクション）
+   ============================================================ */
+function toggleInlineForm(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function addWork(){
+  if (!currentCust) return;
+  const type = document.getElementById('wfType').value;
+  const ym = document.getElementById('wfYm').value;
+  const err = document.getElementById('wfError');
+  if (!type || !ym){ err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  const amount = Number(document.getElementById('wfAmount').value) || 0;
+  currentCust.works.push({ type: type, ym: ym, amount: amount });
+  document.getElementById('wfYm').value = '';
+  document.getElementById('wfAmount').value = '';
+  rerenderEverything();
+  openDrawer(currentCust.id);
+}
+
+function addLog(){
+  if (!currentCust) return;
+  const kind = document.getElementById('lfKind').value;
+  const memo = document.getElementById('lfMemo').value.trim() || '（メモなし）';
+  if (!currentCust.logs) currentCust.logs = [];
+  currentCust.logs.unshift({ date: fmtToday(), kind: kind, memo: memo });
+  document.getElementById('lfMemo').value = '';
+  document.getElementById('logForm').classList.remove('open');
+  renderLogs(currentCust);
+}
+
+function saveNextAction(v){
+  if (!currentCust) return;
+  currentCust.nextAction = v || null;
+  renderAll();
+}
+function clearNextAction(){
+  if (!currentCust) return;
+  currentCust.nextAction = null;
+  document.getElementById('dNextAction').value = '';
+  renderAll();
+}
+
+/* ============================================================
+   CRM: 顧客の新規登録・編集モーダル
+   ============================================================ */
+let editingCust = null;
+
+function openCustModal(custId){
+  editingCust = custId ? customers.find(c => c.id === custId) : null;
+  document.getElementById('custModalTitle').textContent = editingCust ? '顧客情報を編集' : '新規顧客を登録';
+  document.getElementById('cfName').value = editingCust ? editingCust.name : '';
+  document.getElementById('cfKana').value = (editingCust && editingCust.kana) || '';
+  document.getElementById('cfAddress').value = editingCust ? (editingCust.address || '') : '';
+  document.getElementById('cfPhone').value = (editingCust && editingCust.phone) || '';
+  document.getElementById('cfEmail').value = (editingCust && editingCust.email) || '';
+  document.getElementById('cfStatus').value = editingCust ? (editingCust.status || 'OB') : 'OB';
+  document.getElementById('cfNote').value = (editingCust && editingCust.note) || '';
+  document.getElementById('cfError').style.display = 'none';
+  document.getElementById('custModal').classList.add('open');
+}
+function closeCustModal(){
+  document.getElementById('custModal').classList.remove('open');
+}
+
+function saveCustomer(){
+  const name = document.getElementById('cfName').value.trim();
+  if (!name){ document.getElementById('cfError').style.display = 'block'; return; }
+  const address = document.getElementById('cfAddress').value.trim();
+  const vals = {
+    name: name,
+    kana: document.getElementById('cfKana').value.trim(),
+    address: address,
+    phone: document.getElementById('cfPhone').value.trim(),
+    email: document.getElementById('cfEmail').value.trim(),
+    status: document.getElementById('cfStatus').value,
+    note: document.getElementById('cfNote').value.trim(),
+  };
+  if (editingCust){
+    Object.assign(editingCust, vals);
+    const a = areaOf(address);
+    if (a) editingCust.area = a;
+  } else {
+    const c = Object.assign({
+      id: nextId(), first: nowY, works: [], logs: [],
+      area: areaOf(address) || 'その他',
+    }, vals);
+    customers.push(c);
+  }
+  closeCustModal();
+  rerenderEverything();
+  if (editingCust && currentCust && editingCust.id === currentCust.id &&
+      document.getElementById('drawer').classList.contains('open')) {
+    openDrawer(currentCust.id);
+  }
+}
+
+/* ============================================================
+   CRM: Excel(CSV)取り込み
+   ============================================================ */
+let impRows = [];
+const IMP_FIELDS = ['氏名', '住所', '電話', '施工内容', '施工年月', '金額', '取り込まない'];
+const IMP_AUTO = [
+  { field: '氏名',     re: /氏名|名前|お名前|顧客/ },
+  { field: '住所',     re: /住所|所在地/ },
+  { field: '電話',     re: /電話|TEL|Tel|tel/ },
+  { field: '施工内容', re: /施工内容|工事内容|工事名|工事|工種/ },
+  { field: '施工年月', re: /施工年月|施工日|工事日|完工|竣工/ },
+  { field: '金額',     re: /金額|請負|工事費|代金/ },
+];
+
+function openImportModal(){
+  document.getElementById('impError').style.display = 'none';
+  impShow(1);
+  document.getElementById('importModal').classList.add('open');
+}
+function closeImportModal(){
+  document.getElementById('importModal').classList.remove('open');
+}
+function impShow(n){
+  [1, 2, 3].forEach(i => {
+    document.getElementById('impStep' + i).style.display = (i === n) ? 'block' : 'none';
+  });
+}
+function impBackToStep1(){ impShow(1); }
+
+function parseCsv(text){
+  const rows = [];
+  let row = [], field = '', inQ = false;
+  for (let i = 0; i < text.length; i++){
+    const ch = text[i];
+    if (inQ){
+      if (ch === '"'){
+        if (text[i + 1] === '"'){ field += '"'; i++; } else { inQ = false; }
+      } else { field += ch; }
+    } else {
+      if (ch === '"'){ inQ = true; }
+      else if (ch === ','){ row.push(field); field = ''; }
+      else if (ch === '\n' || ch === '\r'){
+        if (ch === '\r' && text[i + 1] === '\n') i++;
+        row.push(field); field = '';
+        if (row.some(f => f.trim() !== '')) rows.push(row);
+        row = [];
+      }
+      else { field += ch; }
+    }
+  }
+  row.push(field);
+  if (row.some(f => f.trim() !== '')) rows.push(row);
+  return rows;
+}
+
+function handleFile(file){
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let text;
+    try { text = new TextDecoder('utf-8', { fatal: true }).decode(reader.result); }
+    catch (e) {
+      try { text = new TextDecoder('shift_jis').decode(reader.result); }
+      catch (e2) { text = new TextDecoder().decode(reader.result); }
+    }
+    startMapping(parseCsv(text));
+  };
+  reader.onerror = () => { document.getElementById('impError').style.display = 'block'; };
+  reader.readAsArrayBuffer(file);
+}
+
+function loadSampleCsv(){
+  const sample =
+    'お名前,ご住所,電話番号,工事内容,施工日,金額(万円)\n' +
+    '青木 義雄,横浜市青葉区たちばな台2丁目,045-961-0001,給湯器交換,2016/9/10,38\n' +
+    '内田 早苗,横浜市青葉区もみの木台,045-961-0002,外壁塗装,2014/8/20,115\n' +
+    '大野 公平,横浜市緑区いぶき野,045-931-0003,ユニットバスのコーキング,2016/7/5,5\n' +
+    '川島 初枝,町田市南つくし野3丁目,042-795-0004,キッチン交換,2006/10/15,88\n' +
+    '菊地 信夫,横浜市都筑区荏田南5丁目,045-941-0005,シロアリ防除,2021/6/30,15\n';
+  startMapping(parseCsv(sample));
+}
+
+function startMapping(rows){
+  if (!rows || rows.length < 2){
+    document.getElementById('impError').style.display = 'block';
+    impShow(1);
+    return;
+  }
+  document.getElementById('impError').style.display = 'none';
+  impRows = rows;
+  const head = rows[0];
+
+  const tr = document.getElementById('mapHeadRow');
+  tr.innerHTML = '';
+  head.forEach((h, i) => {
+    const th = document.createElement('th');
+    const lbl = document.createElement('div');
+    lbl.textContent = h || ('列' + (i + 1));
+    lbl.style.cssText = 'font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:500;';
+    const sel = document.createElement('select');
+    IMP_FIELDS.forEach(f => {
+      const o = document.createElement('option');
+      o.value = f; o.textContent = f;
+      sel.appendChild(o);
+    });
+    const auto = IMP_AUTO.find(a => a.re.test(h || ''));
+    sel.value = auto ? auto.field : '取り込まない';
+    th.appendChild(lbl);
+    th.appendChild(sel);
+    tr.appendChild(th);
+  });
+  // 同じ項目が複数列に自動割当されたら最初の列だけ残す
+  const seen = new Set();
+  [...tr.querySelectorAll('select')].forEach(s => {
+    if (s.value === '取り込まない') return;
+    if (seen.has(s.value)) s.value = '取り込まない'; else seen.add(s.value);
+  });
+
+  const tb = document.getElementById('mapBody');
+  tb.innerHTML = '';
+  rows.slice(1, 6).forEach(r => {
+    const trb = document.createElement('tr');
+    head.forEach((_, i) => {
+      const td = document.createElement('td');
+      td.textContent = r[i] || '';
+      trb.appendChild(td);
+    });
+    tb.appendChild(trb);
+  });
+  document.getElementById('mapError').style.display = 'none';
+  impShow(2);
+}
+
+function normalizeYM(s){
+  if (s == null) return null;
+  const m = String(s).trim().match(/(\d{4})\s*[年\/\-\.]\s*(\d{1,2})/);
+  if (!m) return null;
+  return m[1] + '-' + String(Number(m[2])).padStart(2, '0');
+}
+
+function doImport(){
+  const map = [...document.querySelectorAll('#mapHeadRow select')].map(s => s.value);
+  const idx = f => map.indexOf(f);
+  if (idx('氏名') === -1){
+    document.getElementById('mapError').style.display = 'block';
+    return;
+  }
+  document.getElementById('mapError').style.display = 'none';
+
+  let nc = 0, nw = 0;
+  impRows.slice(1).forEach(r => {
+    const name = (r[idx('氏名')] || '').trim();
+    if (!name) return;
+    const address = idx('住所') >= 0 ? (r[idx('住所')] || '').trim() : '';
+    const c = {
+      id: nextId(), name: name, address: address,
+      phone: idx('電話') >= 0 ? (r[idx('電話')] || '').trim() : '',
+      area: areaOf(address) || 'その他',
+      first: nowY, status: 'OB', works: [], logs: [],
+      note: 'Excel台帳から取り込み（' + fmtToday() + '）',
+    };
+    const wt = idx('施工内容') >= 0 ? (r[idx('施工内容')] || '').trim() : '';
+    const ym = normalizeYM(idx('施工年月') >= 0 ? r[idx('施工年月')] : null);
+    if (wt && ym){
+      const amount = idx('金額') >= 0 ? (Number(String(r[idx('金額')]).replace(/[^\d.]/g, '')) || 0) : 0;
+      c.works.push({ type: wt, ym: ym, amount: amount });
+      nw++;
+      const fy = Number(ym.slice(0, 4));
+      if (fy && fy < c.first) c.first = fy;
+    }
+    customers.push(c);
+    nc++;
+  });
+
+  rerenderEverything();
+  document.getElementById('impDoneMsg').textContent = nc + '件の顧客と ' + nw + '件の施工履歴を取り込みました';
+  impShow(3);
+}
+
+/* ============================================================
+   CRM: 見積・請求
+   ============================================================ */
+let estimates = [
+  { id: 1, custId: 4,  title: '娘様ご新居 新築工事',   wtype: '注文住宅新築', amount: 2980, status: '提出済', date: '2026/05/20' },
+  { id: 2, custId: 11, title: '外壁・屋根塗装工事',     wtype: '外壁塗装',     amount: 148,  status: '提出済', date: '2026/06/03' },
+  { id: 3, custId: 2,  title: '外壁塗装工事',           wtype: '外壁塗装',     amount: 118,  status: '作成中', date: '2026/06/08' },
+  { id: 4, custId: 12, title: '浴室リフォーム工事',     wtype: '浴室リフォーム', amount: 126, status: '受注',   date: '2026/04/15' },
+];
+const EST_CLS = { '作成中': 'cs-mikomi', '提出済': 'cs-shodan', '受注': 'cs-ob', '失注': 'cs-sekou' };
+
+function renderEstimates(){
+  const tbody = document.getElementById('estTbody');
+  tbody.innerHTML = '';
+  [...estimates].sort((a, b) => b.date.localeCompare(a.date)).forEach(e => {
+    const c = customers.find(x => x.id === e.custId);
+    const tr = document.createElement('tr');
+    if (c) tr.onclick = () => openDrawer(c.id);
+    tr.innerHTML =
+      '<td>' + e.date + '</td>' +
+      '<td><div class="tname">' + (c ? c.name + ' 様' : '—') + '</div></td>' +
+      '<td>' + e.title + '</td>' +
+      '<td>' + e.amount.toLocaleString() + '万円</td>' +
+      '<td><span class="cs-chip ' + (EST_CLS[e.status] || 'cs-mikomi') + '">' + e.status + '</span></td>' +
+      '<td class="est-ops"></td>';
+    const cell = tr.querySelector('.est-ops');
+    const mkBtn = (label, cls, fn) => {
+      const b = document.createElement('button');
+      b.className = 'btn small ' + cls;
+      b.textContent = label;
+      b.onclick = ev => { ev.stopPropagation(); fn(); };
+      cell.appendChild(b);
+    };
+    if (e.status === '作成中') mkBtn('提出済にする', '', () => { e.status = '提出済'; renderEstimates(); });
+    if (e.status === '提出済'){
+      mkBtn('受注にする', 'primary', () => estWin(e));
+      mkBtn('失注', '', () => { e.status = '失注'; renderEstimates(); });
+    }
+    if (e.status === '受注'){
+      const s = document.createElement('span');
+      s.style.cssText = 'font-size:11.5px;color:var(--muted);';
+      s.textContent = '施工履歴に登録済み';
+      cell.appendChild(s);
+    }
+    tbody.appendChild(tr);
+  });
+  const sub = estimates.filter(e => e.status === '提出済');
+  document.getElementById('estSummary').textContent =
+    '提出中の見積 ' + sub.length + '件 ・ 合計 ' + sub.reduce((s, e) => s + e.amount, 0).toLocaleString() + '万円';
+}
+
+// 受注 → 施工履歴へ登録 → メンテ周期の管理開始（一気通貫の見せ場）
+function estWin(e){
+  e.status = '受注';
+  const c = customers.find(x => x.id === e.custId);
+  if (c){
+    const ym = nowY + '-' + String(nowM).padStart(2, '0');
+    c.works.push({ type: e.wtype || e.title, ym: ym, amount: e.amount });
+    c.status = '施工中';
+    if (!c.logs) c.logs = [];
+    c.logs.unshift({ date: fmtToday(), kind: '受注', memo: '「' + e.title + '」を受注（' + e.amount.toLocaleString() + '万円）。施工履歴に登録しました' });
+  }
+  rerenderEverything();
+  renderEstimates();
+}
+
+function renderDrawerEst(c){
+  const list = document.getElementById('dEstList');
+  list.innerHTML = '';
+  const items = estimates.filter(e => e.custId === c.id).sort((a, b) => b.date.localeCompare(a.date));
+  if (!items.length){
+    list.innerHTML = '<div class="log-empty">お見積りはまだありません。「この顧客に見積を作成」から登録できます。</div>';
+    return;
+  }
+  items.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'log-item';
+    div.innerHTML =
+      '<span class="ld">' + e.date + '</span>' +
+      '<span class="cs-chip ' + (EST_CLS[e.status] || 'cs-mikomi') + '">' + e.status + '</span>' +
+      '<span class="lm">' + e.title + '</span>' +
+      '<span class="ld">' + e.amount.toLocaleString() + '万円</span>';
+    list.appendChild(div);
+  });
+}
+
+let estDefaultCust = null;
+function openEstModal(custId){
+  estDefaultCust = custId || null;
+  const sel = document.getElementById('efCust');
+  sel.innerHTML = '';
+  [...customers].sort((a, b) => a.id - b.id).forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = c.name + ' 様（' + c.area + '）';
+    sel.appendChild(opt);
+  });
+  if (custId) sel.value = custId;
+  document.getElementById('efTitle').value = '';
+  document.getElementById('efAmount').value = '';
+  document.getElementById('efError').style.display = 'none';
+  document.getElementById('estModal').classList.add('open');
+}
+function closeEstModal(){
+  document.getElementById('estModal').classList.remove('open');
+}
+function saveEstimate(){
+  const custId = Number(document.getElementById('efCust').value);
+  const title = document.getElementById('efTitle').value.trim();
+  if (!custId || !title){ document.getElementById('efError').style.display = 'block'; return; }
+  const e = {
+    id: estimates.reduce((m, x) => Math.max(m, x.id), 0) + 1,
+    custId: custId,
+    title: title,
+    wtype: document.getElementById('efType').value,
+    amount: Number(document.getElementById('efAmount').value) || 0,
+    status: '提出済',
+    date: fmtToday(),
+  };
+  estimates.push(e);
+  const c = customers.find(x => x.id === custId);
+  if (c){
+    if (!c.logs) c.logs = [];
+    c.logs.unshift({ date: fmtToday(), kind: '見積', memo: '「' + e.title + '」の見積を提出（' + e.amount.toLocaleString() + '万円）' });
+    if ((c.status || 'OB') === 'OB' || c.status === '見込み') c.status = '商談中';
+  }
+  closeEstModal();
+  renderEstimates();
+  renderAll();
+  if (c && currentCust && c.id === currentCust.id &&
+      document.getElementById('drawer').classList.contains('open')) {
+    openDrawer(c.id);
+  }
+}
+
+/* ============================================================
+   CRM: CSV書き出し
+   ============================================================ */
+function exportCsv(){
+  const esc = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const lines = [
+    ['氏名', 'ステータス', '住所', '地区', '電話', 'メール', '初回取引', '施工履歴', '次回アクション日', '備考'].map(esc).join(','),
+  ];
+  customers.forEach(c => {
+    const works = c.works.map(w => w.type + '（' + w.ym + '・' + w.amount + '万円）').join('；');
+    lines.push([
+      c.name, c.status || 'OB', c.address, c.area, c.phone || '', c.email || '',
+      c.first + '年', works, c.nextAction || '', c.note || '',
+    ].map(esc).join(','));
+  });
+  const blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'OBカルテ_顧客台帳.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ============================================================
+   初期化
+   ============================================================ */
+(function init(){
+  document.getElementById('todayLabel').textContent =
+    '基準日: ' + nowY + '年' + nowM + '月' + today.getDate() + '日';
+
+  refreshAreaFilter();
+
+  // 施工履歴追加フォームの工事種別（周期マスタ + 周期対象外の代表工事）
+  const wfSel = document.getElementById('wfType');
+  Object.keys(MAINT).forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t + '（周期 ' + MAINT[t].years + '年）';
+    wfSel.appendChild(opt);
+  });
+  ['トイレ交換', '浴室リフォーム', '全面リフォーム', 'その他工事'].forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    wfSel.appendChild(opt);
+  });
+
+  // 見積モーダルの工事種別（周期マスタ + 周期対象外の代表工事）
+  const efSel = document.getElementById('efType');
+  Object.keys(MAINT).concat(['注文住宅新築', 'トイレ交換', '浴室リフォーム', '全面リフォーム', 'その他工事']).forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t;
+    opt.textContent = MAINT[t] ? t + '（周期 ' + MAINT[t].years + '年）' : t;
+    efSel.appendChild(opt);
+  });
+
+  renderSummary();
+  renderFollow();
+  renderAll();
+  renderEstimates();
+})();
+</script>
+<script>
+/* suite embed mode: hide own header when loaded inside a product suite */
+if (new URLSearchParams(location.search).has('embed')) {
+  document.addEventListener('DOMContentLoaded', function(){
+    var h = document.querySelector('header');
+    if (h) h.style.display = 'none';
+  });
+}
+</script>
+</body>
+</html>

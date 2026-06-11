@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>導入と運用: うけつけ24 | 工務店DX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kaki: #C9861F;
+    --kaki-dark: #A8690F;
+    --sumi: #2A2520;
+    --kinari: #FAF6EF;
+    --green: #3D5A4C;
+    --aka: #B5452E;
+    --line: #E8E0D2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--sumi);
+    background: #d8d2c6;
+    line-height: 1.7;
+    font-size: 13px;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm;
+    margin: 16px auto; padding: 14mm 15mm 12mm;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,.18);
+    display: flex; flex-direction: column;
+  }
+  @page { size: A4 portrait; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .sheet { margin: 0; box-shadow: none; width: auto; min-height: auto; }
+  }
+  @media screen and (max-width: 760px) {
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 24px 18px; }
+  }
+  .doc-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 3px solid var(--kaki); padding-bottom: 10px;
+  }
+  .doc-head .for { font-size: 11px; color: #8a8276; letter-spacing: .08em; }
+  .doc-head .brand { font-family: "Noto Serif JP", serif; font-size: 13px; font-weight: 700; }
+  .doc-head .meta { text-align: right; font-size: 10.5px; color: #8a8276; }
+  .title-block { margin: 13px 0 4px; }
+  .tool-tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+    color: var(--kaki-dark); border: 1px solid var(--kaki); border-radius: 99px;
+    padding: 1px 12px; margin-bottom: 8px;
+  }
+  h1 { font-family: "Noto Serif JP", serif; font-size: 24px; letter-spacing: .05em; line-height: 1.4; }
+  h1 small { font-size: 14px; color: #8a8276; font-weight: 500; margin-left: 10px; }
+  .lead-copy { margin-top: 4px; font-size: 13.5px; font-weight: 500; color: var(--kaki-dark); }
+  section { margin-top: 13px; }
+  h2 {
+    font-family: "Noto Serif JP", serif; font-size: 15px; letter-spacing: .1em;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  h2::before { content: ""; display: block; width: 14px; height: 14px; background: var(--kaki); flex: none; }
+  h2 .en { font-size: 10px; color: #b9ae9c; letter-spacing: .15em; font-family: "Noto Sans JP", sans-serif; font-weight: 500; }
+  .flow { list-style: none; }
+  .flow li {
+    display: flex; gap: 10px; padding: 7px 2px; border-bottom: 1px dashed var(--line);
+    font-size: 12.5px; align-items: baseline;
+  }
+  .flow .s { flex: none; font-size: 10px; font-weight: 700; color: #fff; background: var(--sumi); border-radius: 3px; padding: 1px 8px; letter-spacing: .08em; }
+  .flow .du { flex: none; font-size: 11px; color: var(--kaki-dark); font-weight: 700; white-space: nowrap; width: 52px; }
+  .flow .who { flex: none; font-size: 10px; border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: #8a8276; white-space: nowrap; }
+  .flow .who.st { border-color: var(--green); color: var(--green); }
+  .flow .tx b { font-weight: 700; }
+  .prep { display: flex; flex-wrap: wrap; gap: 6px; }
+  .prep span { font-size: 11.5px; background: var(--kinari); border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; }
+  .ops { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ops th { white-space: nowrap; background: var(--kinari); font-size: 11px; letter-spacing: .06em; padding: 5px 10px; border: 1px solid var(--line); text-align: left; }
+  .ops td { padding: 6px 10px; border: 1px solid var(--line); vertical-align: top; }
+  .ops .t { white-space: nowrap; font-weight: 700; color: var(--kaki-dark); }
+  .ops .d { white-space: nowrap; color: #6d655c; }
+  .points { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .point { background: var(--kinari); border: 1px solid var(--line); border-radius: 6px; padding: 9px 12px; }
+  .point b { display: block; font-size: 12px; margin-bottom: 2px; color: var(--green); }
+  .point p { font-size: 11px; color: #57504a; }
+  .demo-ref {
+    margin-top: 13px; background: var(--kinari); border: 1px dashed var(--kaki);
+    border-radius: 6px; padding: 9px 14px; font-size: 12px; display: flex; gap: 12px; align-items: center;
+  }
+  .demo-ref b { color: var(--kaki-dark); white-space: nowrap; }
+  .demo-ref code { font-family: Consolas, monospace; font-size: 11px; background: #fff; padding: 1px 8px; border-radius: 3px; border: 1px solid var(--line); }
+  .doc-foot {
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; font-size: 9.5px; color: #948b7d;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="doc-head">
+    <div>
+      <div class="for">柿本ホーム産業株式会社 御中</div>
+      <div class="brand">工務店DXシリーズ 導入と運用のご案内</div>
+    </div>
+    <div class="meta">2026年6月<br>SafariTech Inc.</div>
+  </div>
+
+  <div class="title-block">
+    <span class="tool-tag">入口 — 問い合わせを取り逃がさない</span>
+    <h1>うけつけ24<small>導入と運用</small></h1>
+    <p class="lead-copy">柿本様側の日常操作はほぼゼロ。「朝サマリーを見る」だけで回る設計です</p>
+  </div>
+
+  <section>
+    <h2>導入の流れ <span class="en">SETUP — 約2週間</span></h2>
+    <ul class="flow">
+      <li><span class="s">STEP 1</span><span class="du">1週目</span><span class="who st">SafariTech</span>
+        <span class="tx"><b>初期設定</b> — 概算の価格帯・補助金制度データを柿本様仕様に調整。るすばんAIの応対シナリオ（緊急水漏れ／見積相談／営業お断り）を作成</span></li>
+      <li><span class="s">STEP 2</span><span class="du">1週目</span><span class="who st">SafariTech</span>
+        <span class="tx"><b>HPに設置</b> — 概算シミュレーターと補助金チェックを現在のホームページに設置（埋め込みタグ1行。HPのデザイン・作りは一切変わりません）</span></li>
+      <li><span class="s">STEP 3</span><span class="du">2週目</span><span class="who">柿本様＋当社</span>
+        <span class="tx"><b>電話の転送設定</b> — フリーダイヤルの「時間外・無応答時の転送」をAI受付番号へ（電話会社の標準機能・工事不要）。<b>昼間の電話は今までどおり</b>事務所で鳴ります</span></li>
+      <li><span class="s">STEP 4</span><span class="du">2週目</span><span class="who">両社</span>
+        <span class="tx"><b>テスト・運用開始</b> — 社員様の携帯からテスト着信・テスト送信をして問題なければ本番開始</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>ご準備いただくもの <span class="en">PREPARE</span></h2>
+    <div class="prep">
+      <span>HPの管理情報（サーバーまたは管理画面）</span>
+      <span>電話転送設定の申込み（当社が手順をご案内）</span>
+      <span>通知を受け取るメールアドレスまたはLINE</span>
+      <span>概算価格帯への一言チェック（30分の打合せ）</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>日々の運用イメージ <span class="en">OPERATION</span></h2>
+    <table class="ops">
+      <tr><th>タイミング</th><th>やること</th><th>所要</th><th>担当</th></tr>
+      <tr>
+        <td class="t">毎朝</td>
+        <td>サマリーを確認。<b>緊急</b>（水漏れ等）→最優先で折り返し、<b>見積相談</b>→当日中にご連絡。優先順位は自動で付いています</td>
+        <td class="d">5分</td><td class="d">事務1名</td>
+      </tr>
+      <tr>
+        <td class="t">都度</td>
+        <td>Web概算・補助金チェックからの相談依頼はメールで届く。要望・予算感が分かった状態で電話できるので商談が速い</td>
+        <td class="d">—</td><td class="d">営業担当</td>
+      </tr>
+      <tr>
+        <td class="t">月次</td>
+        <td>補助金制度・価格データの更新、問い合わせ件数レポートの送付（時間外着信◯件・Web概算◯件→見積依頼◯件）</td>
+        <td class="d">0分</td><td class="d">SafariTech</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>負担を増やさない工夫 <span class="en">DESIGN</span></h2>
+    <div class="points">
+      <div class="point"><b>操作はほぼゼロ</b><p>柿本様側の日常作業は「朝サマリーを見る」だけ。覚える操作がありません。</p></div>
+      <div class="point"><b>今の仕事は変わらない</b><p>昼間の電話もHPの見た目も従来どおり。夜と取り逃がしだけをAIが拾います。</p></div>
+      <div class="point"><b>効果が数字で見える</b><p>月次レポートで「何件拾えたか」を確認。実証3ヶ月の判断材料になります。</p></div>
+    </div>
+  </section>
+
+  <div class="demo-ref">
+    <b>動くデモ</b>
+    <span><code>suite_uketsuke24.html</code> — 概算シミュレーター／補助金チェック／るすばんAIをタブで実演できます。</span>
+  </div>
+
+  <div class="doc-foot">
+    <span>本資料の期間・内容は提案用のたたき台です。実証導入時に詳細を確定します。</span>
+    <span>SafariTech Inc. | shibuya@safaritech.co.jp</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>導入と運用: 現場手帳 | 工務店DX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kaki: #C9861F;
+    --kaki-dark: #A8690F;
+    --sumi: #2A2520;
+    --kinari: #FAF6EF;
+    --green: #3D5A4C;
+    --aka: #B5452E;
+    --line: #E8E0D2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Noto Sans JP", sans-serif;
+    color: var(--sumi);
+    background: #d8d2c6;
+    line-height: 1.7;
+    font-size: 13px;
+  }
+  .sheet {
+    width: 210mm; min-height: 296mm;
+    margin: 16px auto; padding: 14mm 15mm 12mm;
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,.18);
+    display: flex; flex-direction: column;
+  }
+  @page { size: A4 portrait; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .sheet { margin: 0; box-shadow: none; width: auto; min-height: auto; }
+  }
+  @media screen and (max-width: 760px) {
+    .sheet { width: auto; min-height: auto; margin: 0; padding: 24px 18px; }
+  }
+  .doc-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 3px solid var(--kaki); padding-bottom: 10px;
+  }
+  .doc-head .for { font-size: 11px; color: #8a8276; letter-spacing: .08em; }
+  .doc-head .brand { font-family: "Noto Serif JP", serif; font-size: 13px; font-weight: 700; }
+  .doc-head .meta { text-align: right; font-size: 10.5px; color: #8a8276; }
+  .title-block { margin: 13px 0 4px; }
+  .tool-tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+    color: var(--green); border: 1px solid var(--green); border-radius: 99px;
+    padding: 1px 12px; margin-bottom: 8px;
+  }
+  h1 { font-family: "Noto Serif JP", serif; font-size: 24px; letter-spacing: .05em; line-height: 1.4; }
+  h1 small { font-size: 14px; color: #8a8276; font-weight: 500; margin-left: 10px; }
+  .lead-copy { margin-top: 4px; font-size: 13.5px; font-weight: 500; color: var(--kaki-dark); }
+  section { margin-top: 10px; }
+  h2 {
+    font-family: "Noto Serif JP", serif; font-size: 15px; letter-spacing: .1em;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+  h2::before { content: ""; display: block; width: 14px; height: 14px; background: var(--kaki); flex: none; }
+  h2 .en { font-size: 10px; color: #b9ae9c; letter-spacing: .15em; font-family: "Noto Sans JP", sans-serif; font-weight: 500; }
+  .flow { list-style: none; }
+  .flow li {
+    display: flex; gap: 10px; padding: 5px 2px; border-bottom: 1px dashed var(--line);
+    font-size: 12px; align-items: baseline; line-height: 1.6;
+  }
+  .flow .s { flex: none; font-size: 10px; font-weight: 700; color: #fff; background: var(--sumi); border-radius: 3px; padding: 1px 8px; letter-spacing: .08em; }
+  .flow .du { flex: none; font-size: 11px; color: var(--kaki-dark); font-weight: 700; white-space: nowrap; width: 52px; }
+  .flow .who { flex: none; font-size: 10px; border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: #8a8276; white-space: nowrap; }
+  .flow .who.st { border-color: var(--green); color: var(--green); }
+  .flow .tx b { font-weight: 700; }
+  .prep { display: flex; flex-wrap: wrap; gap: 6px; }
+  .prep span { font-size: 11.5px; background: var(--kinari); border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; }
+  .ops { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ops th { white-space: nowrap; background: var(--kinari); font-size: 11px; letter-spacing: .06em; padding: 5px 10px; border: 1px solid var(--line); text-align: left; }
+  .ops td { padding: 5px 10px; border: 1px solid var(--line); vertical-align: top; line-height: 1.6; }
+  .ops .t { white-space: nowrap; font-weight: 700; color: var(--kaki-dark); }
+  .ops .d { white-space: nowrap; color: #6d655c; }
+  .points { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .point { background: var(--kinari); border: 1px solid var(--line); border-radius: 6px; padding: 9px 12px; }
+  .point b { display: block; font-size: 12px; margin-bottom: 2px; color: var(--green); }
+  .point p { font-size: 11px; color: #57504a; }
+  .demo-ref {
+    margin-top: 13px; background: var(--kinari); border: 1px dashed var(--kaki);
+    border-radius: 6px; padding: 9px 14px; font-size: 12px; display: flex; gap: 12px; align-items: center;
+  }
+  .demo-ref b { color: var(--kaki-dark); white-space: nowrap; }
+  .demo-ref code { font-family: Consolas, monospace; font-size: 11px; background: #fff; padding: 1px 8px; border-radius: 3px; border: 1px solid var(--line); }
+  .doc-foot {
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; font-size: 9.5px; color: #948b7d;
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="doc-head">
+    <div>
+      <div class="for">柿本ホーム産業株式会社 御中</div>
+      <div class="brand">工務店DXシリーズ 導入と運用のご案内</div>
+    </div>
+    <div class="meta">2026年6月<br>SafariTech Inc.</div>
+  </div>
+
+  <div class="title-block">
+    <span class="tool-tag">現場・発信 — 段取り共有と実績発信</span>
+    <h1>現場手帳<small>導入と運用</small></h1>
+    <p class="lead-copy">職人さん側は「スマホで見るだけ」。入力は求めない設計です</p>
+  </div>
+
+  <section>
+    <h2>導入の流れ <span class="en">SETUP — 最短1週間</span></h2>
+    <ul class="flow">
+      <li><span class="s">STEP 1</span><span class="du">初日</span><span class="who">両社・1時間</span>
+        <span class="tx"><b>初期登録</b> — 職人さんの名簿（応援含む）と今週・来週の現場をボードに登録。ホワイトボードの写真を見ながらで構いません</span></li>
+      <li><span class="s">STEP 2</span><span class="du">初日</span><span class="who">柿本様</span>
+        <span class="tx"><b>スマホに配布</b> — 職人さんのスマホにURLを共有してブックマーク。<b>アプリのインストールは不要</b>です</span></li>
+      <li><span class="s">STEP 3</span><span class="du">1週目</span><span class="who st">SafariTech</span>
+        <span class="tx"><b>LINE連携の設定</b> — 朝の連絡（現場・住所・持ち物・注意点）を職人さんごとに自動送信できるように設定</span></li>
+      <li><span class="s">STEP 4</span><span class="du">1週目</span><span class="who">両社</span>
+        <span class="tx"><b>写真ルールを決めて開始</b> — 現場ルールは1つだけ:「完工時にBefore／Afterを2枚撮る」。これが事例発信の材料になります</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>ご準備いただくもの <span class="en">PREPARE</span></h2>
+    <div class="prep">
+      <span>職人さんの名簿（応援の協力会社含む）</span>
+      <span>今週・来週の予定（ホワイトボードの写真でOK）</span>
+      <span>職人さんのLINE（朝の連絡用）</span>
+      <span>HP・Instagramの掲載権限（事例発信用）</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>日々の運用イメージ <span class="en">OPERATION</span></h2>
+    <table class="ops">
+      <tr><th>タイミング</th><th>やること</th><th>所要</th><th>担当</th></tr>
+      <tr>
+        <td class="t">前日夕方</td>
+        <td>翌日の予定を確認。変更はカードをドラッグするだけで関係者に自動通知</td>
+        <td class="d">5分</td><td class="d">社長 or 番頭</td>
+      </tr>
+      <tr>
+        <td class="t">毎朝</td>
+        <td>朝の連絡がLINEで自動送信（実証中は「朝の連絡を作成」→コピーして送信）。電話リレーがなくなります</td>
+        <td class="d">0〜5分</td><td class="d">自動／事務</td>
+      </tr>
+      <tr>
+        <td class="t">完工時</td>
+        <td>Before／After写真2枚＋ひと言メモ→事例スタジオで掲載カード・お知らせ・Instagram・口コミ依頼文を生成</td>
+        <td class="d">3分</td><td class="d">現場担当</td>
+      </tr>
+      <tr>
+        <td class="t">週1回</td>
+        <td>たまった事例から1件をHP・Instagramに掲載（コピーして貼るだけ）。週1件ペースが目安</td>
+        <td class="d">10分</td><td class="d">事務</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>負担を増やさない工夫 <span class="en">DESIGN</span></h2>
+    <div class="points">
+      <div class="point"><b>職人さんは見るだけ</b><p>入力や操作は求めません。スマホで今日の現場と段取りメモが見えるだけで効果が出ます。</p></div>
+      <div class="point"><b>ホワイトボード併用OK</b><p>最初から置き換えません。便利さが実感できてからデジタルに一本化すれば十分です。</p></div>
+      <div class="point"><b>発信は週1件から</b><p>頑張って毎日ではなく、続けられるペースで。事例の蓄積がそのまま営業資産になります。</p></div>
+    </div>
+  </section>
+
+  <div class="demo-ref">
+    <b>動くデモ</b>
+    <span><code>suite_genba_techo.html</code> — 現場ボードのドラッグ操作と、写真2枚からの事例生成をタブで実演できます。</span>
+  </div>
+
+  <div class="doc-foot">
+    <span>本資料の期間・内容は提案用のたたき台です。実証導入時に詳細を確定します。</span>
+    <span>SafariTech Inc. | shibuya@safaritech.co.jp</span>
+  </div>
+
+</div>
+</body>
+</html>
