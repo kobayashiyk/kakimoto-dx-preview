@@ -525,8 +525,8 @@
 <div class="container">
 
   <div class="view-tabs">
-    <button class="view-tab active" data-view="catalog" onclick="switchView('catalog')">カタログ見積</button>
-    <button class="view-tab" data-view="new" onclick="switchView('new')">新規見積</button>
+    <button class="view-tab active" data-view="catalog" onclick="switchView('catalog')">カタログ見積（メーカー定価で正確に）</button>
+    <button class="view-tab" data-view="new" onclick="switchView('new')">かんたん見積（自由入力）</button>
     <button class="view-tab" data-view="dup" onclick="switchView('dup')">過去の見積から複製</button>
   </div>
 
@@ -545,6 +545,7 @@
         <div class="cat-toggle">
           <button class="cat-tg active" id="tg-kitchen" onclick="setCatCategory('kitchen')">システムキッチン<small>I型 間口255cm</small></button>
           <button class="cat-tg" id="tg-bath" onclick="setCatCategory('bath')">システムバス<small>戸建て用</small></button>
+          <button class="cat-tg" id="tg-senmen" onclick="setCatCategory('senmen')">洗面化粧台<small>間口60〜165cm</small></button>
         </div>
 
         <!-- キッチン選択フロー -->
@@ -565,6 +566,13 @@
           <div class="step-label">STEP 2　サイズを選ぶ</div>
           <div class="dw-row" id="b-sizes"></div>
           <p class="cat-note">UB→UBの交換前提です。在来浴室からの交換・マンション用サイズは現地調査のうえ別途お見積りします。価格は税別メーカー希望小売価格です。</p>
+        </div>
+
+        <!-- 洗面化粧台選択フロー -->
+        <div id="s-flow" style="display:none;">
+          <div class="step-label">STEP 1　シリーズを選ぶ</div>
+          <div class="plan-grid" id="s-plans"></div>
+          <p class="cat-note">価格は基本セット価格（最安構成・税別メーカー希望小売価格）。間口・カウンタータイプ・水栓のグレードアップは現地確認のうえ加算となります。</p>
         </div>
       </div>
 
@@ -624,7 +632,7 @@
       </div>
 
     </div>
-    <p class="cat-source">価格出典: タカラスタンダード公式価格表（takara-standard.co.jp / kitchen.pdf・bath.pdf、2026年6月時点）。税別メーカー希望小売価格。実導入時は全シリーズ・全間口・最新版を収録し、他メーカー（LIXIL・TOTO・クリナップ等）にも対応予定。</p>
+    <p class="cat-source">価格出典: タカラスタンダード公式価格表（takara-standard.co.jp / kitchen.pdf・bath.pdf・dressing_table.pdf、2026年6月時点）。税別メーカー希望小売価格。実導入時は全シリーズ・全間口・最新版を収録予定。トイレ・給湯器はタカラスタンダードに価格表がないため、実導入時に他メーカー（TOTO・LIXIL・リンナイ等）の定価データを収録します。</p>
   </div>
 
   <!-- ============ 新規見積 ============ -->
@@ -1162,24 +1170,38 @@ const B_PLANS = [
   {series:"グランスパ", name:"シンプルプラン（FRP浴槽）", note:"防水パンなしの場合", p:{"1616":527800,"1620":569300}},
 ];
 
+// 洗面化粧台: 基本セット価格（最安構成・税別・円単位の正確値）
+const S_PLANS = [
+  {name:"エリーナ（ELEENA）",           feat:"最高クラスの大容量収納・ホーロー製キャビネット", widths:"75・90・100・120・135・150・165cm", p:232400},
+  {name:"ファミーユ（Famile）",         feat:"使い分けできる2Wayカウンター・ホーロー製",       widths:"60・75・90・100・120cm",           p:132200},
+  {name:"オンディーヌ ハイバックタイプ", feat:"継ぎ目のないハイバック形状・ホーローボウル",     widths:"75cm",                             p:115700},
+  {name:"オンディーヌ デッキ水栓タイプ", feat:"広いホーローボウル",                             widths:"60・75cm",                         p:60400},
+  {name:"リジャスト（Rejust）",         feat:"間口1cm刻みでサイズオーダー可・木製キャビネット", widths:"75〜150cm",                        p:107100},
+  {name:"ウィット（Wit）",              feat:"全35色のカラーバリエーション・木製",             widths:"60・75cm",                         p:51800},
+];
+
 const PACKS = {
   kitchen:{name:"キッチン交換標準工事", total:248000, items:[
     ["既存キッチン解体撤去・処分",58000],["給排水接続工事",45000],["電気・ガス工事",38000],["キッチン組立・施工",72000],["養生・諸経費",35000]]},
   bath:{name:"浴室交換標準工事", total:348000, items:[
     ["既存浴室解体撤去・処分",95000],["給排水工事",68000],["電気工事",45000],["メーカー責任施工・組立",95000],["入口枠補修・養生",45000]]},
+  senmen:{name:"洗面化粧台交換標準工事", total:65000, items:[
+    ["既存撤去・処分",15000],["給排水接続",22000],["本体設置・固定",18000],["養生・諸経費",10000]]},
 };
 const EXTRAS = {
   kitchen:[["床CF張替",38000],["壁・天井クロス張替",40000],["IH用電源増設工事",35000]],
   bath:[["洗面所側クロス・CF張替",45000],["給湯器接続替え",28000],["手すり追加（2本）",28000]],
+  senmen:[["壁クロス張替",24000],["床CF張替",22000],["止水栓交換",8000]],
 };
 
 const catState = {
   cat:"kitchen",
   kPlan:0, kSel:"lemure_G1", kDw:false,
   bPlan:3, bSize:"1616",
+  sPlan:0,
   sale:80, cost:65,
-  pack:{kitchen:true, bath:true}, packOpen:false,
-  extras:{kitchen:[false,false,false], bath:[false,false,false]},
+  pack:{kitchen:true, bath:true, senmen:true}, packOpen:false,
+  extras:{kitchen:[false,false,false], bath:[false,false,false], senmen:[false,false,false]},
 };
 
 function kitchenMan(plan, key){
@@ -1200,6 +1222,14 @@ function getCatProduct(){
       name:"タカラスタンダード システムキッチン "+s.label+"（"+parts.join("・")+"）",
       list: man*10000,
       listDisp:"約"+man+"万円（税別）"
+    };
+  }
+  if(catState.cat === "senmen"){
+    const plan = S_PLANS[catState.sPlan];
+    return {
+      name:"タカラスタンダード 洗面化粧台 "+plan.name+"（基本セット・対応間口 "+plan.widths+"）",
+      list: plan.p,
+      listDisp: yen(plan.p)+"円（税別）"
     };
   }
   const plan = B_PLANS[catState.bPlan];
@@ -1301,6 +1331,18 @@ function renderBSizes(){
   });
 }
 
+function renderSPlans(){
+  const g = $("s-plans"); g.innerHTML = "";
+  S_PLANS.forEach((pl,i)=>{
+    const c = document.createElement("button");
+    c.className = "plan-card"+(i === catState.sPlan ? " active" : "");
+    c.innerHTML = '<span class="pc-name">'+pl.name+'</span><span class="pc-spec">'+pl.feat+'</span>'
+      + '<span class="pc-spec">対応間口 '+pl.widths+'　基本セット '+yen(pl.p)+'円</span>';
+    c.addEventListener("click", ()=>{ catState.sPlan = i; renderSPlans(); recalcCat(); });
+    g.appendChild(c);
+  });
+}
+
 function renderPackExtras(){
   const c = catState.cat;
   const pack = PACKS[c];
@@ -1324,8 +1366,10 @@ function setCatCategory(c){
   catState.cat = c;
   $("tg-kitchen").classList.toggle("active", c === "kitchen");
   $("tg-bath").classList.toggle("active", c === "bath");
+  $("tg-senmen").classList.toggle("active", c === "senmen");
   $("k-flow").style.display = c === "kitchen" ? "" : "none";
   $("b-flow").style.display = c === "bath" ? "" : "none";
+  $("s-flow").style.display = c === "senmen" ? "" : "none";
   renderPackExtras();
   recalcCat();
 }
@@ -1386,7 +1430,7 @@ function applyCatalog(){
   const cost = Math.round(prod.list * catState.cost / 100);
   const c = catState.cat;
   clearRows();
-  $("f-koujimei").value = c === "kitchen" ? "システムキッチン交換工事" : "浴室ユニットバス交換工事";
+  $("f-koujimei").value = c === "kitchen" ? "システムキッチン交換工事" : c === "senmen" ? "洗面化粧台交換工事" : "浴室ユニットバス交換工事";
   addRow({name:prod.name, qty:1, unit:"式", price:sale, cost:cost, fromMaster:true});
   if(catState.pack[c]){
     PACKS[c].items.forEach(it=> addRow({name:it[0], qty:1, unit:"式", price:it[1], cost:Math.round(it[1]*0.7), fromMaster:true}));
@@ -1407,6 +1451,7 @@ syncHead();
 recalc();
 renderKPlans(); renderKSeries(); renderKDw();
 renderBPlans(); renderBSizes();
+renderSPlans();
 renderPackExtras();
 recalcCat();
 </script>
