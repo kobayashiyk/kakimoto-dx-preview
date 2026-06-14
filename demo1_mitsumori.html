@@ -355,12 +355,16 @@ h1,h2,h3,.serif{font-family:'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN'
 .screen{display:none;}
 .screen.active{display:block;animation:fadeIn .35s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  .back-to-list{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;text-decoration:none;color:var(--kaki-dark);border:1px solid var(--kaki);border-radius:999px;padding:4px 12px;white-space:nowrap;transition:background .15s,color .15s;}
+  .back-to-list:hover{background:var(--kaki);color:#fff;}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
+    <a href="index.html" class="back-to-list">&larr; デモ一覧へ</a>
     <div class="brand">
       <div class="brand-name"><span class="mark">柿本</span>ホーム産業</div>
       <div class="brand-sub">横浜市青葉区｜創業1965年｜リフォーム・新築・軽量鉄骨</div>
