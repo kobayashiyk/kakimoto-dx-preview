@@ -464,7 +464,8 @@ var WORKS = [
 var SUBSIDIES = [
   {
     id:"kosodate",
-    name:"子育てグリーン住宅支援事業",
+    name:"みらいエコ住宅2026事業",
+    url:"https://mirai-eco2026.mlit.go.jp/",
     org:"国", orgClass:"kuni",
     target:"窓・ドアの断熱改修、高効率給湯器、節水型トイレ、浴室改修、手すり設置等のバリアフリー改修、キッチンのエコ設備 ほか",
     timing:"予算上限に達し次第終了。例年秋以降に予算消化が加速するため、早めの交付申請を推奨。",
@@ -480,6 +481,7 @@ var SUBSIDIES = [
   {
     id:"kyutosho",
     name:"給湯省エネ2026事業",
+    url:"https://kyutou-shoene2026.meti.go.jp/",
     org:"国", orgClass:"kuni",
     target:"エコキュート・ハイブリッド給湯機・エネファーム等の高効率給湯器の設置",
     timing:"対象機種の性能要件あり。設置台数ごとに加算。予算枠の消化状況に注意。",
@@ -489,6 +491,7 @@ var SUBSIDIES = [
   {
     id:"madoreno",
     name:"先進的窓リノベ2026事業",
+    url:"https://window-renovation2026.env.go.jp/",
     org:"国", orgClass:"kuni",
     target:"既存窓の内窓設置・外窓交換・ガラス交換・断熱ドアへの交換",
     timing:"補助額が大きく人気のため、年度前半での申請が有利。窓の性能区分で補助単価が変動。",
@@ -498,6 +501,7 @@ var SUBSIDIES = [
   {
     id:"kaigo",
     name:"介護保険の住宅改修費支給",
+    url:"https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/koreisha-kaigo/kaigo-hoken/kaishuhi/juukai.html",
     org:"介護保険", orgClass:"kaigo",
     target:"手すりの取付け、段差の解消、滑り防止の床材変更、引き戸への扉交換、洋式便器への取替え 等",
     timing:"必ず着工前にケアマネジャー経由で事前申請が必要。着工後の申請は支給対象外。",
@@ -518,6 +522,7 @@ var SUBSIDIES = [
   {
     id:"yokohama_taishin",
     name:"横浜市木造住宅耐震改修促進事業（サンプル）",
+    url:"https://www.city.yokohama.lg.jp/business/bunyabetsu/kenchiku/bosai/taishin/hojokinshienseido/mokutai/mokukaishu/mokukaishu.html",
     org:"横浜市", orgClass:"shi",
     target:"旧耐震基準（昭和56年5月以前着工）の木造住宅の耐震改修工事",
     timing:"事前に市の無料耐震診断が必要。診断から改修まで年度をまたぐ場合があるため早めの着手を。",
@@ -528,7 +533,7 @@ var SUBSIDIES = [
 
 /* ========== 併用可否の注意 ========== */
 var COMBINE_NOTES = [
-  "先進的窓リノベと子育てグリーンは、同一の窓工事での重複申請はできません（別の箇所・別工事であれば併用可）。",
+  "先進的窓リノベとみらいエコ住宅2026は、同一の窓工事での重複申請はできません（別の箇所・別工事であれば併用可）。",
   "国の補助金と横浜市の補助金は原則併用できますが、同一工事費への重複充当はできません。",
   "介護保険の住宅改修費は他制度と対象工事が重ならなければ併用可能です。必ず着工前の事前申請が必要です。",
   "合計概算は各制度の上限額の単純合算です。実際の補助額は工事内容・申請時期により変動します。"
